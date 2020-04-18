@@ -44,7 +44,7 @@ Animator:
   m_GameObject: {fileID: 4806920482935668790}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 3b80cfa17ff4df846b930274197edc6a, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -72,6 +72,7 @@ MonoBehaviour:
   _bulletSpawnPoint: {fileID: 4806920484522029577}
   _weaponAnimator: {fileID: 0}
   _recoilTriggerName: TriggerRecoil
+  _headSpriteRenderer: {fileID: 4806920483171847958}
   _speedParameterName: Speed
   _skipTriggerName: TriggerSkip
   _deathTriggerName: TriggerDeath
@@ -182,7 +183,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4806920483171847960}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.25, z: 0}
+  m_LocalPosition: {x: 0, y: 1.14, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4806920482935668789}
