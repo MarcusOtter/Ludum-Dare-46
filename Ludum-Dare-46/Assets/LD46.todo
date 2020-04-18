@@ -1,0 +1,74 @@
+Escort plant game (PLANT·E)
+
+The player has a plant on their head.
+The plant needs sunlight to grow and live.
+The plant meter naturally degerenates.
+
+We are on a extraterrestrial planet in space.
+
+Isometric top down makes sense so we'll go with that.
+
+- What are the enemies?
+    - Why can't they attack you in the dark?
+
+The light is moving because clouds, yo. Phat cloud vape nation. And clout.
+
+The plant evolves over time in stages and each new stage has an upgrade
+The upgrades happen immediately as the plant meter reaches the end of the plant meter.
+  |-------------------|-------------------------------------------------------------|
+Death            After upgrade                                                  New upgrade
+
+UpgradeEvent.cs
+    Triggered by the meter getting full
+    C# event is a static event called EventTriggered which sends the upgrade type
+
+
+SoundManager subscribes to UpgradeEvent.EventTriggered with += playsound
+PlantMeter.cs subscribes to the event and sets the amount to 10%
+UiManager.cs subscribes and puts some text on the screen
+PlantGraphics.cs subscribes and adds a new middle part depending on which upgrade type (enum)
+
+A little bit silly. Use colors.
+Art is up to Irma - good luck!
+
+Nuclear throne is an inspiration for the game.
+
+The middle parts of the plant (that grows forever) represent the upgrade you get.
+For example, if you get increased movement speed you would want that middle part to convey that.
+
+Music and sound effects would be good
+
+The plant meter is the health bar, and it depletes when you get shot or stand in the shadows.
+
+To do Saturday:
+
+    Marcus:
+        ☐ Player movement
+        ☐ Player camera
+        ☐ Player shooting
+
+    Irma:
+        ☐ Player graphics
+        ☐ Planet graphics
+        ☐ Plant graphics
+
+    Daniel:
+        ☐ Upgrade system
+        ☐ Plant meter
+
+    Co-programming:
+        ☐ Clouds and lighting
+
+To do Sunday:
+    ☐ Music
+    ☐ Sound effects for enemies
+    ☐ Enemy graphics
+    ☐ Plant meter graphics
+    ☐ Enemy behaviour
+    ☐ Difficulty scaling
+
+To do Monday:
+    ☐ Playtesting and tweaking difficulty scaling
+    ☐ Particle effects
+    ☐ Menu UI + graphics
+    ☐ Destructible objects in scene + graphics
