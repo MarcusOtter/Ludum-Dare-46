@@ -15,7 +15,7 @@ public abstract class Weapon : MonoBehaviour
 
     [Header("Audio settings")]
     [SerializeField] protected SoundEffect ShootSound;
-
+    [SerializeField] protected GameObject MuzzleFlash;
 
     public void ChangeBullet(Upgrade upgrade)
     {   
