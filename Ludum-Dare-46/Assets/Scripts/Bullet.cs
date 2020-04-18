@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Collections;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class Bullet : MonoBehaviour
@@ -25,6 +26,8 @@ public class Bullet : MonoBehaviour
     {
         _damage = damage;
         _rigidbody.AddForce(transform.up * speed, ForceMode2D.Impulse);
+
+        transform.localScale = new Vector3(3f, 3f, 3f);
         Destroy(transform.root.gameObject, _timeUntilDestroyed);
     }
 

@@ -16,6 +16,6 @@ MonoBehaviour:
   UpgradeText: This is what you'll get when you mess with us or hit level 10
   PlantUpgradeSprite: {fileID: 0}
   aquiredOnLevel: 10
-  FloatValue: 0
+  FloatValue: 3
   IntValue: 0
   BulletPrefab: {fileID: 0}
