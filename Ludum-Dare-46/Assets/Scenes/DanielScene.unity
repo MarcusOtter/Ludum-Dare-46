@@ -369,8 +369,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c938941abd045584888d021209561067, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  plantMeterStart: 5
-  plantMeterMax: 23
+  plantMeterStart: 0.5
+  plantMeterMax: 1
 --- !u!114 &1130597824
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -409,6 +409,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 7156772516776096183, guid: 679fbd7d0f1784040b703d4c087c27df,
+        type: 3}
+      propertyPath: m_FillAmount
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7156772518271569251, guid: 679fbd7d0f1784040b703d4c087c27df,
         type: 3}
       propertyPath: m_LocalPosition.x

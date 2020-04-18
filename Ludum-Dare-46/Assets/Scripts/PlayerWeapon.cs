@@ -32,6 +32,8 @@ public class PlayerWeapon : Weapon
         _parentTransform = transform.parent;
         _userInput.OnAttackKeyDown += RegisterAttackKeyDown;
         _userInput.OnAttackKeyUp += RegisterAttackKeyUp;
+
+        UpgradeManager.OnLevelUp += ChangeBullet;
     }
 
     protected override void WeaponBehaviour()
@@ -139,6 +141,7 @@ public class PlayerWeapon : Weapon
     {
         _userInput.OnAttackKeyDown -= RegisterAttackKeyDown;
         _userInput.OnAttackKeyUp -= RegisterAttackKeyUp;
+        UpgradeManager.OnLevelUp -= ChangeBullet;
     }
 }
 

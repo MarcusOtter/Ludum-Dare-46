@@ -5,9 +5,8 @@ using UnityEngine;
 public class PlayerAttributes : MonoBehaviour, IDamageable
 {
     internal static Action OnDeath;
-    
     [Header("PlantMeter")]
-    [SerializeField] internal float plantMeterStart = default, plantMeterMax = default;
+    [SerializeField] internal float plantMeterStart = .1f, plantMeterMax = 1f;
 
     internal float plantMeterCurrent;
     internal float MovementSpeed { get; private set; } = 1f;
@@ -15,6 +14,7 @@ public class PlayerAttributes : MonoBehaviour, IDamageable
 
     private UpgradeManager _upgradeManager;
     private int _level;
+
 
     private void OnEnable()
     {
@@ -50,10 +50,6 @@ public class PlayerAttributes : MonoBehaviour, IDamageable
             case UpgradeType.MovementSpeed:
                 MovementSpeed += upgrade.FloatValue;
                 break;
-
-            case UpgradeType.BulletType:
-                BulletType = upgrade.BulletTypeValue;
-                break;
         }
     }
 
@@ -66,14 +62,17 @@ public class PlayerAttributes : MonoBehaviour, IDamageable
             if(plantMeterCurrent >= plantMeterMax)
             {
                 plantMeterCurrent = plantMeterStart + (plantMeterCurrent - plantMeterMax);
-                _upgradeManager.LevelUp();
+                _level++;
+                _upgradeManager.LevelUp(_level);
             }
         }
         else
         {
             //do bad stuff somewhere else
-            if(plantMeterCurrent < 0f)
+            if(plantMeterCurrent <= 0f)
             {
+                //print("Dead");
+                plantMeterCurrent = 0f;
                 OnDeath?.Invoke();
             }
         }
