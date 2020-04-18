@@ -2,24 +2,9 @@
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class PlayerWeapon : MonoBehaviour
+public class PlayerWeapon : Weapon
 {
     internal static event EventHandler OnWeaponFire;
-
-    public Vector2 AimDirection { get; private set; }
-
-    [Header("Bullet settings")]
-    [SerializeField] protected Bullet BulletPrefabToSpawn;
-    [SerializeField] protected int BulletDamage = 2;
-    [SerializeField] protected float BulletSpeed = 40;
-
-    [Header("Weapon settings")]
-    [SerializeField] protected float ShootDelay = 0.15f;
-    [SerializeField] [Range(0f, 1f)] protected float Accuracy = 0.925f;
-
-    [Header("Audio settings")]
-    [SerializeField] protected SoundEffect ShootSound;
-
 
     [Header("Player weapon settings")]
     [SerializeField] internal Transform ShellCasingSpawnPoint;
@@ -49,7 +34,7 @@ public class PlayerWeapon : MonoBehaviour
         _userInput.OnAttackKeyUp += RegisterAttackKeyUp;
     }
 
-    private void Update()
+    protected override void WeaponBehaviour()
     {
         RotateTowardsMouse();
 
@@ -67,9 +52,7 @@ public class PlayerWeapon : MonoBehaviour
         SprayBullets();
     }
 
-    /// <summary>
-    /// Spawns a bullet when the attack key is being held .
-    /// </summary>
+    /// <summary>Spawns a bullet when the attack key is being held </summary>
     private void SprayBullets()
     {
         if (Time.time - (_holdStartTime + _bulletsFiredThisHold * ShootDelay) > ShootDelay)
@@ -130,7 +113,7 @@ public class PlayerWeapon : MonoBehaviour
     //    if (!_canShoot)
     //    {
     //        _fireWhenPossible = false;
-    //        RegisterAttackKeyUp(this);
+    //        RegisterAttackKeyUp(this, EventArgs.Empty);
     //    }
     //}
 
@@ -158,3 +141,4 @@ public class PlayerWeapon : MonoBehaviour
         _userInput.OnAttackKeyUp -= RegisterAttackKeyUp;
     }
 }
+

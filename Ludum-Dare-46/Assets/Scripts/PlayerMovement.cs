@@ -5,7 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public class PlayerMovement : MonoBehaviour
 {
-    [SerializeField] private float _movementSpeed;
+    [SerializeField] private float _movementSpeed = 1f;
 
     private PlayerInput _input;
     private Rigidbody2D _rigidbody;
