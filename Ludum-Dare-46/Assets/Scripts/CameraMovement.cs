@@ -16,8 +16,6 @@ public class CameraMovement : MonoBehaviour
     private Transform _playerTransform;
     private Weapon _playerWeapon;
 
-    private Vector2 _velocity;
-
     private Coroutine _runningCameraShake;
 
     private void OnEnable()
@@ -40,7 +38,7 @@ public class CameraMovement : MonoBehaviour
     }
 
 
-    private void CameraShakeSmall(object sender, EventArgs args)
+    private void CameraShakeSmall(PlayerWeapon sender)
     {
         if (_runningCameraShake != null) { return; }
 

@@ -7,11 +7,11 @@ public class Upgrade : ScriptableObject
     public UpgradeType Type;
     public string UpgradeText;
     public Sprite PlantUpgradeSprite;
-    public int aquiredOnLevel;
+    public int aquiredOnLevel = -1;
 
     [Header("Upgrade values")]
     public float FloatValue;
     public float IntValue;
-    public BulletType BulletTypeValue;
+    public Bullet BulletPrefab;
 }
 
