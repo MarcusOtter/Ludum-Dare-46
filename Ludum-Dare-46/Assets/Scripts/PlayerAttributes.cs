@@ -5,11 +5,14 @@ using UnityEngine;
 public class PlayerAttributes : MonoBehaviour, IDamageable
 {
     internal static Action OnDeath;
-    [Header("PlantMeter")]
-    [SerializeField] internal float plantMeterStart = .1f, plantMeterMax = 1f;
+
+    public float MovementSpeed;
+
+    [Header("Plant meter")]
+    [SerializeField] internal float plantMeterStart = 0.1f;
+    [SerializeField] internal float plantMeterMax = 1f;
 
     internal float plantMeterCurrent;
-    internal float MovementSpeed { get; private set; } = 1f;
     internal BulletType BulletType { get; private set; }
 
     private UpgradeManager _upgradeManager;
