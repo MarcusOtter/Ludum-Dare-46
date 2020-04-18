@@ -9,14 +9,17 @@ public class PlayerAttributes : MonoBehaviour, IDamageable
     public float MovementSpeed;
 
     [Header("Plant meter")]
-    [SerializeField] internal float plantMeterStart = 0.1f;
-    [SerializeField] internal float plantMeterMax = 1f;
+    [SerializeField] internal float plantMeterStart = 5f;
+    [SerializeField] internal float plantMeterMax = 15f;
+    [SerializeField] private float plantMeterChargeRate = 1f, plantMeterDepletionRate = 1f;
 
     internal float plantMeterCurrent;
     internal BulletType BulletType { get; private set; }
 
     private UpgradeManager _upgradeManager;
     private int _level;
+
+    private int cloudCount = 0;
 
 
     private void OnEnable()
@@ -33,15 +36,15 @@ public class PlayerAttributes : MonoBehaviour, IDamageable
         UpgradeManager.OnLevelUp -= ApplyUpgrade;
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
-        if (Input.GetButton("Jump"))
+        if(cloudCount < 1)
         {
-            ChangePlantMeter(Time.deltaTime);
+            ChangePlantMeter(plantMeterChargeRate * Time.deltaTime);
         }
         else
         {
-            ChangePlantMeter(-Time.deltaTime);
+            ChangePlantMeter(-plantMeterDepletionRate * Time.deltaTime);
         }
     }
 
@@ -80,6 +83,23 @@ public class PlayerAttributes : MonoBehaviour, IDamageable
             }
         }
     }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.GetComponent<Cloud>() != null)
+        {
+            cloudCount++;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.GetComponent<Cloud>() != null)
+        {
+            cloudCount--;
+        }
+    }
+
 
     public void TakeDamage(float incomingDamage)
     {
