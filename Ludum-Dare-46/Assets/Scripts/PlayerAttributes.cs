@@ -34,11 +34,11 @@ public class PlayerAttributes : MonoBehaviour, IDamageable
     {
         if (Input.GetButton("Jump"))
         {
-            AddToPlantMeter(Time.deltaTime);
+            ChangePlantMeter(Time.deltaTime);
         }
         else
         {
-            AddToPlantMeter(-Time.deltaTime);
+            ChangePlantMeter(-Time.deltaTime);
         }
     }
 
@@ -57,23 +57,30 @@ public class PlayerAttributes : MonoBehaviour, IDamageable
         }
     }
 
-    internal void AddToPlantMeter(float plantEnergy)
+    internal void ChangePlantMeter(float plantEnergyDelta)
     {
-        plantMeterCurrent +=  plantEnergy;
-        if(plantMeterCurrent >= plantMeterMax)
+        plantMeterCurrent +=  plantEnergyDelta;
+        if(plantEnergyDelta > 0f)
         {
-            plantMeterCurrent = plantMeterStart + (plantMeterCurrent - plantMeterMax);
-            _upgradeManager.LevelUp();
+            //do cool effect somewhere else
+            if(plantMeterCurrent >= plantMeterMax)
+            {
+                plantMeterCurrent = plantMeterStart + (plantMeterCurrent - plantMeterMax);
+                _upgradeManager.LevelUp();
+            }
+        }
+        else
+        {
+            //do bad stuff somewhere else
+            if(plantMeterCurrent < 0f)
+            {
+                OnDeath?.Invoke();
+            }
         }
     }
 
     public void TakeDamage(float incomingDamage)
     {
-        plantMeterCurrent -= incomingDamage;
-
-        if (plantMeterCurrent <= plantMeterStart)
-        {
-            OnDeath?.Invoke();
-        }
+        ChangePlantMeter(-incomingDamage);
     }
 }
