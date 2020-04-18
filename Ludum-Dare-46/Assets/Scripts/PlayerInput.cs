@@ -38,8 +38,8 @@ public class PlayerInput : MonoBehaviour
 			OnAttackKeyUp?.Invoke(this);
 		}
 
-		HorizontalAxis = Input.GetAxis(_horizontalAxisName);
-		VerticalAxis = Input.GetAxis(_verticalAxisName);
+		HorizontalAxis = Input.GetAxisRaw(_horizontalAxisName);
+		VerticalAxis = Input.GetAxisRaw(_verticalAxisName);
 	}
 
 	private Vector3 GetMouseWorldPosition()
