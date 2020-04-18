@@ -5,6 +5,7 @@ public class Bullet : MonoBehaviour
 {
     [Header("Bullet settings")]
     [SerializeField] private bool _isPlayerBullet;
+    [SerializeField] private float _timeUntilDestroyed = 5f;
 
     [Header("Impact settings")]
     [SerializeField] private SoundEffect _impactSound;
@@ -24,6 +25,7 @@ public class Bullet : MonoBehaviour
     {
         _damage = damage;
         _rigidbody.AddForce(transform.up * speed, ForceMode2D.Impulse);
+        Destroy(transform.root.gameObject, _timeUntilDestroyed);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

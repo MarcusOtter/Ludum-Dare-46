@@ -18,6 +18,7 @@ public class PlayerGraphics : MonoBehaviour
     [SerializeField] private string _recoilTriggerName = "TriggerRecoil";
 
     [Header("Movement animation")]
+    [SerializeField] private SpriteRenderer _headSpriteRenderer;
     [SerializeField] private string _speedParameterName = "Speed";
     [SerializeField] private string _skipTriggerName = "TriggerSkip";
 
@@ -66,13 +67,15 @@ public class PlayerGraphics : MonoBehaviour
             ? _sortInFrontNumber
             : _sortBehindNumber;
 
-        // Set the flipY of gun sprite
         _weaponSpriteRenderer.flipY = _rotationZ < 180;
+        _headSpriteRenderer.flipX = _rotationZ < 180;
 
         // Flip the weapon spawner offset (for weapons that don't spawn from the middle of the sprite)
         _bulletSpawnPoint.localPosition =
             new Vector3(_rotationZ < 180 ? -_bulletSpawnPointXOffset : _bulletSpawnPointXOffset,
                 _bulletSpawnPoint.localPosition.y, 0);
+
+        if (_bodyAnimator == null) { return; }
 
         // Update the float in the animator
         _bodyAnimator.SetFloat(_speedParameterHash, Mathf.Abs(_rigidbody.velocity.x) + Mathf.Abs(_rigidbody.velocity.y));
@@ -81,17 +84,20 @@ public class PlayerGraphics : MonoBehaviour
     // Makes the player jump whenever a bullet is fired from the player weapon
     private void TriggerSkip(object sender, EventArgs args)
     {
+        if (_bodyAnimator == null) { return; }
         _bodyAnimator.SetTrigger(_skipTriggerHash);
     }
 
     private void TriggerWeaponRecoil(object sender, EventArgs args)
     {
+        if (_weaponAnimator == null) { return; }
         _weaponAnimator.SetTrigger(_recoilTriggerHash);
     }
 
     // Called by PlayerDeathBehaviour
     internal void PlayDeathAnimation()
     {
+        if (_bodyAnimator == null) { return; }
         _bodyAnimator.SetTrigger(_deathTriggerHash);
     }
 

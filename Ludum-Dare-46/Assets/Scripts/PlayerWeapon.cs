@@ -103,7 +103,7 @@ public class PlayerWeapon : Weapon
         _lastBulletSpawnTime = Time.time;
     }
 
-    // Enable or disable shooting (called by unity events in tutorial)
+    //Enable or disable shooting(called by unity events in tutorial)
     //public void EnableShooting(bool enable)
     //{
     //    if (_canShoot == enable) { return; }
