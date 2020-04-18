@@ -1,18 +1,20 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
-public class PlayerAttributes : MonoBehaviour
+[RequireComponent(typeof(Collider2D))]
+public class PlayerAttributes : MonoBehaviour, IDamageable
 {
-    [Header("Level")]
-    private int _level;
-
+    internal static Action OnDeath;
+    
     [Header("PlantMeter")]
     [SerializeField] internal float plantMeterStart = default, plantMeterMax = default;
+
     internal float plantMeterCurrent;
     internal float MovementSpeed { get; private set; } = 1f;
     internal BulletType BulletType { get; private set; }
 
     private UpgradeManager _upgradeManager;
-
+    private int _level;
 
     private void OnEnable()
     {
@@ -28,8 +30,21 @@ public class PlayerAttributes : MonoBehaviour
         UpgradeManager.OnLevelUp -= ApplyUpgrade;
     }
 
+    private void Update()
+    {
+        if (Input.GetButton("Jump"))
+        {
+            ChangePlantMeter(Time.deltaTime);
+        }
+        else
+        {
+            ChangePlantMeter(-Time.deltaTime);
+        }
+    }
+
     private void ApplyUpgrade(Upgrade upgrade)
     {
+        print(upgrade.UpgradeText);
         switch (upgrade.Type)
         {
             case UpgradeType.MovementSpeed:
@@ -42,13 +57,30 @@ public class PlayerAttributes : MonoBehaviour
         }
     }
 
-    internal void AddToPlantMeter(float plantEnergy)
+    internal void ChangePlantMeter(float plantEnergyDelta)
     {
-        plantMeterCurrent +=  plantEnergy;
-        if(plantMeterCurrent >= plantMeterMax)
+        plantMeterCurrent +=  plantEnergyDelta;
+        if(plantEnergyDelta > 0f)
         {
-            plantMeterCurrent = plantMeterStart + (plantMeterCurrent - plantMeterMax);
-            _upgradeManager.LevelUp();
+            //do cool effect somewhere else
+            if(plantMeterCurrent >= plantMeterMax)
+            {
+                plantMeterCurrent = plantMeterStart + (plantMeterCurrent - plantMeterMax);
+                _upgradeManager.LevelUp();
+            }
         }
+        else
+        {
+            //do bad stuff somewhere else
+            if(plantMeterCurrent < 0f)
+            {
+                OnDeath?.Invoke();
+            }
+        }
+    }
+
+    public void TakeDamage(float incomingDamage)
+    {
+        ChangePlantMeter(-incomingDamage);
     }
 }

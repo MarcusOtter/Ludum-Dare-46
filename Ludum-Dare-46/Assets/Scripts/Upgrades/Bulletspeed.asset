@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Bulletspeed
   m_EditorClassIdentifier: 
   Type: 0
-  UpgradeText: 
+  UpgradeText: Faster bullets!
   PlantUpgradeSprite: {fileID: 0}
   aquiredOnLevel: 0
   FloatValue: 0

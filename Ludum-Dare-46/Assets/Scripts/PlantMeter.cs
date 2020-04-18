@@ -1,18 +1,22 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.UI;
 
 public class PlantMeter : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    private Image plantMeter;
+    private PlayerAttributes attributes;
+
+    private void Start()
     {
-        
+        plantMeter = GetComponent<Image>();
+        attributes = FindObjectOfType<PlayerAttributes>();    
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        
+        if (attributes != null)
+            plantMeter.fillAmount = attributes.plantMeterCurrent / attributes.plantMeterMax;
+        else
+            plantMeter.fillAmount = 0.0f;
     }
 }
