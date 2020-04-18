@@ -27,7 +27,9 @@ public class AudioManager : MonoBehaviour
 
     internal void PlaySoundEffect(SoundEffect soundEffect, float volumeScale = 1f)
     {
-        if (soundEffect.AudioClips.Length is 0)
+        if (soundEffect is null) { return; }
+
+        if (soundEffect.AudioClips is null || soundEffect.AudioClips.Length is 0)
         {
             Debug.LogError($"Sound effect \"{soundEffect.name}\" does not have any audio clips.");
             return;
