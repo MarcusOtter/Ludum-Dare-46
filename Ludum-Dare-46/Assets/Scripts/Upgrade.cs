@@ -7,6 +7,7 @@ public class Upgrade : ScriptableObject
     public UpgradeType Type;
     public string UpgradeText;
     public Sprite PlantUpgradeSprite;
+    public int aquiredOnLevel;
 
     [Header("Upgrade values")]
     public float FloatValue;
