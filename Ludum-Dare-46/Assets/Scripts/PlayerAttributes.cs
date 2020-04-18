@@ -11,7 +11,7 @@ public class PlayerAttributes : MonoBehaviour, IDamageable
     [Header("Plant meter")]
     [SerializeField] internal float plantMeterStart = 5f;
     [SerializeField] internal float plantMeterMax = 15f;
-    [SerializeField] private float plantMeterChargeRate = 1f, plantMeterDepletionRate = 1f;
+    [SerializeField] private float plantMeterChargeRate = 0.05f, plantMeterDepletionRate = 0.1f;
 
     internal float plantMeterCurrent;
     internal BulletType BulletType { get; private set; }
@@ -40,11 +40,11 @@ public class PlayerAttributes : MonoBehaviour, IDamageable
     {
         if(cloudCount < 1)
         {
-            ChangePlantMeter(plantMeterChargeRate * Time.deltaTime);
+            ChangePlantMeter(plantMeterChargeRate * Time.fixedDeltaTime);
         }
         else
         {
-            ChangePlantMeter(-plantMeterDepletionRate * Time.deltaTime);
+            ChangePlantMeter(-plantMeterDepletionRate * Time.fixedDeltaTime);
         }
     }
 
@@ -77,29 +77,28 @@ public class PlayerAttributes : MonoBehaviour, IDamageable
             //do bad stuff somewhere else
             if(plantMeterCurrent <= 0f)
             {
-                //print("Dead");
+                print("Dead");
                 plantMeterCurrent = 0f;
                 OnDeath?.Invoke();
             }
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D collider)
     {
-        if(collision.GetComponent<Cloud>() != null)
+        if(collider.GetComponent<Cloud>() != null)
         {
             cloudCount++;
         }
     }
 
-    private void OnTriggerExit2D(Collider2D collision)
+    private void OnTriggerExit2D(Collider2D collider)
     {
-        if (collision.GetComponent<Cloud>() != null)
+        if (collider.GetComponent<Cloud>() != null)
         {
             cloudCount--;
         }
     }
-
 
     public void TakeDamage(float incomingDamage)
     {

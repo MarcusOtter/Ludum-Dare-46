@@ -338,8 +338,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MovementSpeed: 8
-  plantMeterStart: 0.1
+  plantMeterStart: 0.25
   plantMeterMax: 1
+  plantMeterChargeRate: 0.05
+  plantMeterDepletionRate: 0.1
 --- !u!114 &9177230544427444593
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -497,7 +499,8 @@ MonoBehaviour:
   ShootDelay: 0.15
   Accuracy: 0.925
   ShootSound: {fileID: 0}
-  MuzzleFlash: {fileID: 0}
+  MuzzleFlash: {fileID: 1073639375773658633, guid: 61bbb20e7c824d340932bc5fbdffd80e,
+    type: 3}
   ShellCasingSpawnPoint: {fileID: 0}
   RecoilKnockbackForce: 10
 --- !u!1 &4806920484586531858
