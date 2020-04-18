@@ -10,6 +10,8 @@ public class PlayerMovement : MonoBehaviour
     private PlayerInput _input;
     private Rigidbody2D _rigidbody;
 
+    private PlayerAttributes _attributes;
+
     private Vector2 _recoilKnockbackVector;
 
     private void OnEnable()
@@ -19,6 +21,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Start()
     {
+        _attributes = GetComponent<PlayerAttributes>();
         _input = PlayerInput.Instance;
         _rigidbody = GetComponent<Rigidbody2D>();
     }
@@ -27,7 +30,7 @@ public class PlayerMovement : MonoBehaviour
     {
         _rigidbody.velocity =
             Vector2.ClampMagnitude(new Vector2(_input.HorizontalAxis, _input.VerticalAxis), 1)
-            * _movementSpeed + _recoilKnockbackVector;
+            * _attributes.MovementSpeed + _recoilKnockbackVector;
 
         // Reset recoil knockback vector after applying it
         _recoilKnockbackVector = Vector2.zero;
