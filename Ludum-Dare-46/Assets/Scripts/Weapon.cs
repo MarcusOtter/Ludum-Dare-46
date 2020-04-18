@@ -18,9 +18,7 @@ public abstract class Weapon : MonoBehaviour
 
 
     public void ChangeBullet(Upgrade upgrade)
-    {
-        print("Hello");
-        
+    {   
         if (upgrade.Type != UpgradeType.Bullet) return;
 
         if (upgrade.BulletPrefab != null)
