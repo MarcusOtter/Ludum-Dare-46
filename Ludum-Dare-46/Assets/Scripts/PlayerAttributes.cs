@@ -1,18 +1,20 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
-public class PlayerAttributes : MonoBehaviour
+[RequireComponent(typeof(Collider2D))]
+public class PlayerAttributes : MonoBehaviour, IDamageable
 {
-    [Header("Level")]
-    private int _level;
-
+    internal static Action OnDeath;
+    
     [Header("PlantMeter")]
     [SerializeField] internal float plantMeterStart = default, plantMeterMax = default;
+
     internal float plantMeterCurrent;
     internal float MovementSpeed { get; private set; } = 1f;
     internal BulletType BulletType { get; private set; }
 
     private UpgradeManager _upgradeManager;
-
+    private int _level;
 
     private void OnEnable()
     {
@@ -62,6 +64,16 @@ public class PlayerAttributes : MonoBehaviour
         {
             plantMeterCurrent = plantMeterStart + (plantMeterCurrent - plantMeterMax);
             _upgradeManager.LevelUp();
+        }
+    }
+
+    public void TakeDamage(float incomingDamage)
+    {
+        plantMeterCurrent -= incomingDamage;
+
+        if (plantMeterCurrent <= plantMeterStart)
+        {
+            OnDeath?.Invoke();
         }
     }
 }

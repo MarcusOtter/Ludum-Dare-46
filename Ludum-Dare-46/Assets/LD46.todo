@@ -66,8 +66,11 @@ To do Sunday:
     ☐ Plant meter graphics
     ☐ Enemy behaviour
     ☐ Difficulty scaling
+    ☐ Highscores?
+        Parse as json, upload to some service, download and parse
 
 To do Monday:
+    ☐ Game name
     ☐ Playtesting and tweaking difficulty scaling
     ☐ Particle effects
     ☐ Menu UI + graphics
