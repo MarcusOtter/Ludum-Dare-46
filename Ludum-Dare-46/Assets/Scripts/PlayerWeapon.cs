@@ -33,7 +33,20 @@ public class PlayerWeapon : Weapon
         _userInput.OnAttackKeyDown += RegisterAttackKeyDown;
         _userInput.OnAttackKeyUp += RegisterAttackKeyUp;
 
-        UpgradeManager.OnLevelUp += ChangeBullet;
+        PlayerAttributes.OnLevelUp += ChangeBullet;
+    }
+
+    private void ChangeBullet(int level, Upgrade upgrade)
+    {
+        if (upgrade.Type != UpgradeType.Bullet) { return; }
+
+        if (upgrade.BulletPrefab == null)
+        {
+            Debug.LogError($"The upgrade {upgrade.name} is of type bullet but has no bullet prefab attached.");
+            return;
+        }
+
+        BulletPrefabToSpawn = upgrade.BulletPrefab;
     }
 
     protected override void WeaponBehaviour()
@@ -142,7 +155,7 @@ public class PlayerWeapon : Weapon
     {
         _userInput.OnAttackKeyDown -= RegisterAttackKeyDown;
         _userInput.OnAttackKeyUp -= RegisterAttackKeyUp;
-        UpgradeManager.OnLevelUp -= ChangeBullet;
+        PlayerAttributes.OnLevelUp -= ChangeBullet;
     }
 }
 

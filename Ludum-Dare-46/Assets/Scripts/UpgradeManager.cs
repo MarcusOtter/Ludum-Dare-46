@@ -1,17 +1,13 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
-using System;
-
 using Random = UnityEngine.Random;
+
 public class UpgradeManager : MonoBehaviour
 {
-    private List<Upgrade> _randomUpgrades = new List<Upgrade>();
-    private List<Upgrade> _scheduledUpgrades = new List<Upgrade>();
+    [SerializeField] private Upgrade[] _allUpgrades;
 
-    [SerializeField] private Upgrade[] _allUpgrades = new Upgrade[0];
-
-    internal static event Action<Upgrade> OnLevelUp;
+    private readonly List<Upgrade> _randomUpgrades = new List<Upgrade>();
+    private readonly List<Upgrade> _scheduledUpgrades = new List<Upgrade>();
 
     private void Start()
     {
@@ -42,9 +38,9 @@ public class UpgradeManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Returns random upgrade from the available upgrades list and removes it from the list afterwards
+    /// Returns random upgrade from the available upgrades list and removes it from the list afterwards.
     /// </summary>
-    private Upgrade GetUpgrade(int level) 
+    internal Upgrade GetUpgrade(int level) 
     {
         Upgrade upgrade;
 
@@ -52,7 +48,6 @@ public class UpgradeManager : MonoBehaviour
         {
             if(level == _scheduledUpgrades[i].aquiredOnLevel)
             {
-
                 upgrade = _scheduledUpgrades[i];
                 _scheduledUpgrades.RemoveAt(i);
                 return upgrade;
@@ -62,17 +57,9 @@ public class UpgradeManager : MonoBehaviour
         int index = Random.Range(0, _randomUpgrades.Count);
         upgrade = _randomUpgrades[index];
         _randomUpgrades.RemoveAt(index);
+
         if (_randomUpgrades.Count == 0) PopulateRandomUpgrades();
         
         return upgrade;
-    }
-
-    /// <summary>
-    /// Invokes the upgrade event with a random upgrade
-    /// </summary>
-    public void LevelUp(int level)
-    {
-        Upgrade upgrade = GetUpgrade(level);
-        OnLevelUp?.Invoke(upgrade);
     }
 }

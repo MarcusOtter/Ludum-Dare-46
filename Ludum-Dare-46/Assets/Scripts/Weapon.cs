@@ -17,18 +17,6 @@ public abstract class Weapon : MonoBehaviour
     [SerializeField] protected SoundEffect ShootSound;
     [SerializeField] protected GameObject MuzzleFlash;
 
-    public void ChangeBullet(Upgrade upgrade)
-    {   
-        if (upgrade.Type != UpgradeType.Bullet) return;
-
-        if (upgrade.BulletPrefab != null)
-        {
-            BulletPrefabToSpawn = upgrade.BulletPrefab;
-        }
-        else
-            Debug.LogError($"The upgrade {upgrade.name} is of type bullet but has no bullet prefab attached");
-    }
-
     protected virtual void Update()
     {
         WeaponBehaviour();

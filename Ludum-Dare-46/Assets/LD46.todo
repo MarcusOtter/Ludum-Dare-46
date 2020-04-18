@@ -60,7 +60,7 @@ To do Saturday:
         ✔ Clouds and lighting
 
 To do Sunday:
-    ☐ Plant stacking
+    ✔ Plant stacking
     ☐ Add upgrades
     ☐ Music
     ☐ Sound effects for enemies
@@ -72,13 +72,17 @@ To do Sunday:
         Parse as json, upload to some service, download and parse
 
     Tweaks to make the game more fun imo:
-        ☐ Make only the top of your head count for the sun energy collection thing (like daniel said from the start)
+        ✔ Make the plant meter decrease if any part of the plant is inside the shadow (bigger plant over time -> more difficult)
+        ☐ Make the camera zoom out the bigger your plant is so you can see it? (But should be capped, also harder to aim over time)
         ☐ Have things in the environment that you want to interact with, maybe you need to go to a water place and collect water before getting upgrade
-            Right now there's no real incentive to like walk into the shadows like ever is there?
+            Because right now there's no real incentive to like walk into the shadows like ever is there?
+            Unless we make the enemies really strong or something
 
 To do Monday:
-    ☐ Game name
+    ☐ Build actual level
     ☐ Playtesting and tweaking difficulty scaling
+        Perhaps the energy meter should go slower and slower for each level to build up? Only marginally
     ☐ Particle effects
+    ☐ Game name
     ☐ Menu UI + graphics
     ☐ Destructible objects in scene + graphics

@@ -44,6 +44,7 @@ public class PlayerInput : MonoBehaviour
 
 	private Vector3 GetMouseWorldPosition()
 	{
+		if (_mainCamera == null) { _mainCamera = Camera.main; }
 		return _mainCamera.ScreenToWorldPoint(Input.mousePosition);
 	}
 

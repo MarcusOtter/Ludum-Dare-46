@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9bf5f059eba1e6a4db5465d50fa4c0d0, type: 3}
-  m_Name: Level10
+  m_Name: Bullet upgrade
   m_EditorClassIdentifier: 
-  Type: 0
-  UpgradeText: This is what you'll get when you mess with us or hit level 10
-  PlantUpgradeSprite: {fileID: 0}
-  aquiredOnLevel: 10
-  FloatValue: 3
+  Type: 2
+  UpgradeText: This is a bullet upgrade!
+  PlantUpgradeSprite: {fileID: 21300000, guid: 0eaf7856a0b347d48902ad8f0b7943a3, type: 3}
+  aquiredOnLevel: -1
+  FloatValue: 0
   IntValue: 0
   BulletPrefab: {fileID: 0}

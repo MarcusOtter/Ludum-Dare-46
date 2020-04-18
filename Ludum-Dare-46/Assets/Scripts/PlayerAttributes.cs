@@ -5,44 +5,25 @@ using UnityEngine;
 public class PlayerAttributes : MonoBehaviour, IDamageable
 {
     internal static Action OnDeath;
+    internal static Action<int, Upgrade> OnLevelUp;
 
     public float MovementSpeed;
 
     [Header("Plant meter")]
     [SerializeField] internal float PlantMeterStart = 0.25f;
     [SerializeField] internal float PlantMeterMax = 1f;
-    [SerializeField] private float _plantMeterChargeRate = 0.05f, _plantMeterDepletionRate = 0.1f;
 
     internal float PlantMeterCurrent { get; private set; }
 
     private UpgradeManager _upgradeManager;
 
     private int _level;
-    private int _cloudCount;
     private bool _isDead;
 
     private void Awake()
     {
         _upgradeManager = GetComponent<UpgradeManager>();
         PlantMeterCurrent = PlantMeterStart;
-    }
-
-    private void OnEnable()
-    {
-        UpgradeManager.OnLevelUp += ApplyUpgrade;
-    }
-
-    private void OnDisable()
-    {
-        UpgradeManager.OnLevelUp -= ApplyUpgrade;
-    }
-
-    private void FixedUpdate()
-    {
-        if (_isDead) { return; }
-
-        var plantMeterDelta = _cloudCount < 1 ? _plantMeterChargeRate : -_plantMeterDepletionRate;
-        ChangePlantMeter(plantMeterDelta * Time.fixedDeltaTime);
     }
 
     private void ApplyUpgrade(Upgrade upgrade)
@@ -66,33 +47,30 @@ public class PlayerAttributes : MonoBehaviour, IDamageable
 
         if (PlantMeterCurrent >= PlantMeterMax)
         {
-            PlantMeterCurrent = PlantMeterStart + (PlantMeterCurrent - PlantMeterMax);
-            _level++;
-            _upgradeManager.LevelUp(_level);
+            LevelUp();
         }
 
         if (PlantMeterCurrent <= 0f)
         {
-            print("Dead");
-            PlantMeterCurrent = 0f;
-            OnDeath?.Invoke();
+            Die();
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collider)
+    private void LevelUp()
     {
-        if(collider.GetComponent<Cloud>() != null)
-        {
-            _cloudCount++;
-        }
+        PlantMeterCurrent = PlantMeterStart + (PlantMeterCurrent - PlantMeterMax);
+
+        _level++;
+        var upgrade = _upgradeManager.GetUpgrade(_level);
+        OnLevelUp?.Invoke(_level, upgrade);
+        ApplyUpgrade(upgrade);
     }
 
-    private void OnTriggerExit2D(Collider2D collider)
+    private void Die()
     {
-        if (collider.GetComponent<Cloud>() != null)
-        {
-            _cloudCount--;
-        }
+        print("Dead");
+        PlantMeterCurrent = 0f;
+        OnDeath?.Invoke();
     }
 
     public void TakeDamage(float incomingDamage)
