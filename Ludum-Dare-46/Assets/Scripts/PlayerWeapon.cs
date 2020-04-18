@@ -102,6 +102,7 @@ public class PlayerWeapon : Weapon
         AudioManager.Instance.PlaySoundEffect(ShootSound);
 
         Instantiate(BulletPrefabToSpawn, transform.position, GetRandomOffsetBulletRotation()).Shoot(BulletDamage, BulletSpeed);
+        Instantiate(MuzzleFlash, transform.position, transform.rotation);
         _lastBulletSpawnTime = Time.time;
     }
 
