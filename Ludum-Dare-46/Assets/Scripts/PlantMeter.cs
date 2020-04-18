@@ -15,7 +15,7 @@ public class PlantMeter : MonoBehaviour
     private void Update()
     {
         if (attributes != null)
-            plantMeter.fillAmount = attributes.plantMeterCurrent / attributes.plantMeterMax;
+            plantMeter.fillAmount = attributes.PlantMeterCurrent / attributes.PlantMeterMax;
         else
             plantMeter.fillAmount = 0.0f;
     }

@@ -9,28 +9,29 @@ public class PlayerAttributes : MonoBehaviour, IDamageable
     public float MovementSpeed;
 
     [Header("Plant meter")]
-    [SerializeField] internal float plantMeterStart = 5f;
-    [SerializeField] internal float plantMeterMax = 15f;
-    [SerializeField] private float plantMeterChargeRate = 0.05f, plantMeterDepletionRate = 0.1f;
+    [SerializeField] internal float PlantMeterStart = 0.25f;
+    [SerializeField] internal float PlantMeterMax = 1f;
+    [SerializeField] private float _plantMeterChargeRate = 0.05f, _plantMeterDepletionRate = 0.1f;
 
-    internal float plantMeterCurrent;
-    internal BulletType BulletType { get; private set; }
+    internal float PlantMeterCurrent { get; private set; }
 
     private UpgradeManager _upgradeManager;
+
     private int _level;
+    private int _cloudCount;
+    private bool _isDead;
 
-    private int cloudCount = 0;
-
+    private void Awake()
+    {
+        _upgradeManager = GetComponent<UpgradeManager>();
+        PlantMeterCurrent = PlantMeterStart;
+    }
 
     private void OnEnable()
     {
-        if (_upgradeManager == null) _upgradeManager = GetComponent<UpgradeManager>();
-
         UpgradeManager.OnLevelUp += ApplyUpgrade;
-
-        plantMeterCurrent = plantMeterStart;
-        
     }
+
     private void OnDisable()
     {
         UpgradeManager.OnLevelUp -= ApplyUpgrade;
@@ -38,18 +39,16 @@ public class PlayerAttributes : MonoBehaviour, IDamageable
 
     private void FixedUpdate()
     {
-        if(cloudCount < 1)
-        {
-            ChangePlantMeter(plantMeterChargeRate * Time.fixedDeltaTime);
-        }
-        else
-        {
-            ChangePlantMeter(-plantMeterDepletionRate * Time.fixedDeltaTime);
-        }
+        if (_isDead) { return; }
+
+        var plantMeterDelta = _cloudCount < 1 ? _plantMeterChargeRate : -_plantMeterDepletionRate;
+        ChangePlantMeter(plantMeterDelta * Time.fixedDeltaTime);
     }
 
     private void ApplyUpgrade(Upgrade upgrade)
     {
+        if (_isDead) { return; }
+
         print(upgrade.UpgradeText);
         switch (upgrade.Type)
         {
@@ -61,26 +60,22 @@ public class PlayerAttributes : MonoBehaviour, IDamageable
 
     internal void ChangePlantMeter(float plantEnergyDelta)
     {
-        plantMeterCurrent +=  plantEnergyDelta;
-        if(plantEnergyDelta > 0f)
+        if (_isDead) { return; }
+
+        PlantMeterCurrent += plantEnergyDelta;
+
+        if (PlantMeterCurrent >= PlantMeterMax)
         {
-            //do cool effect somewhere else
-            if(plantMeterCurrent >= plantMeterMax)
-            {
-                plantMeterCurrent = plantMeterStart + (plantMeterCurrent - plantMeterMax);
-                _level++;
-                _upgradeManager.LevelUp(_level);
-            }
+            PlantMeterCurrent = PlantMeterStart + (PlantMeterCurrent - PlantMeterMax);
+            _level++;
+            _upgradeManager.LevelUp(_level);
         }
-        else
+
+        if (PlantMeterCurrent <= 0f)
         {
-            //do bad stuff somewhere else
-            if(plantMeterCurrent <= 0f)
-            {
-                print("Dead");
-                plantMeterCurrent = 0f;
-                OnDeath?.Invoke();
-            }
+            print("Dead");
+            PlantMeterCurrent = 0f;
+            OnDeath?.Invoke();
         }
     }
 
@@ -88,7 +83,7 @@ public class PlayerAttributes : MonoBehaviour, IDamageable
     {
         if(collider.GetComponent<Cloud>() != null)
         {
-            cloudCount++;
+            _cloudCount++;
         }
     }
 
@@ -96,7 +91,7 @@ public class PlayerAttributes : MonoBehaviour, IDamageable
     {
         if (collider.GetComponent<Cloud>() != null)
         {
-            cloudCount--;
+            _cloudCount--;
         }
     }
 
