@@ -1,19 +1,19 @@
 fileFormatVersion: 2
-guid: 243328f4710c85640a4023f385e1b069
+guid: 39de2781a97c6ca4ca0f7f8ce8f558ff
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -7895041166902596080
-    second: PotSpriteSheet_0
+      213: -7649535480441249337
+    second: EnemyForward1_0
   - first:
-      213: -7937006057183083191
-    second: PotSpriteSheet_1
+      213: -7529472892747743180
+    second: EnemyForward1_1
   - first:
-      213: -5400894004108686792
-    second: PotSpriteSheet_2
+      213: -5401707396222263534
+    second: EnemyForward1_2
   - first:
-      213: 5752672371633880117
-    second: PotSpriteSheet_3
+      213: -2457753538531117635
+    second: EnemyForward1_3
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -57,7 +57,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 32
+  spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -99,13 +99,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: PotSpriteSheet_0
+      name: EnemyForward1_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 32
-        height: 32
+        width: 50
+        height: 50
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -113,20 +113,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 01e6faf63ed2f6290800000000000000
-      internalID: -7895041166902596080
+      spriteID: 7c16d8f620467d590800000000000000
+      internalID: -7649535480441249337
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PotSpriteSheet_1
+      name: EnemyForward1_1
       rect:
         serializedVersion: 2
-        x: 32
+        x: 50
         y: 0
-        width: 32
-        height: 32
+        width: 50
+        height: 50
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -134,20 +134,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9458a750b071ad190800000000000000
-      internalID: -7937006057183083191
+      spriteID: 43086d10c40f18790800000000000000
+      internalID: -7529472892747743180
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PotSpriteSheet_2
+      name: EnemyForward1_2
       rect:
         serializedVersion: 2
-        x: 64
+        x: 100
         y: 0
-        width: 32
-        height: 32
+        width: 50
+        height: 50
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -155,20 +155,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 83a8097b48b2c05b0800000000000000
-      internalID: -5400894004108686792
+      spriteID: 21f529b1eb74905b0800000000000000
+      internalID: -5401707396222263534
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PotSpriteSheet_3
+      name: EnemyForward1_3
       rect:
         serializedVersion: 2
-        x: 96
+        x: 150
         y: 0
-        width: 32
-        height: 32
+        width: 50
+        height: 50
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -176,8 +176,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 53cf0740b0995df40800000000000000
-      internalID: 5752672371633880117
+      spriteID: db5b46ead2e44edd0800000000000000
+      internalID: -2457753538531117635
       vertices: []
       indices: 
       edges: []
