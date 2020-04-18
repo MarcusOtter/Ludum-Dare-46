@@ -10,11 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9bf5f059eba1e6a4db5465d50fa4c0d0, type: 3}
-  m_Name: New Upgrade
+  m_Name: Bulletspeed
   m_EditorClassIdentifier: 
   Type: 0
-  UpgradeText: 
+  UpgradeText: Faster bullets!
   PlantUpgradeSprite: {fileID: 0}
+  aquiredOnLevel: 0
   FloatValue: 0
   IntValue: 0
   BulletTypeValue: 0

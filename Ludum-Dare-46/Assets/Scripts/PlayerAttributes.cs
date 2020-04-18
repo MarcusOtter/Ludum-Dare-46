@@ -28,8 +28,21 @@ public class PlayerAttributes : MonoBehaviour
         UpgradeManager.OnLevelUp -= ApplyUpgrade;
     }
 
+    private void Update()
+    {
+        if (Input.GetButton("Jump"))
+        {
+            AddToPlantMeter(Time.deltaTime);
+        }
+        else
+        {
+            AddToPlantMeter(-Time.deltaTime);
+        }
+    }
+
     private void ApplyUpgrade(Upgrade upgrade)
     {
+        print(upgrade.UpgradeText);
         switch (upgrade.Type)
         {
             case UpgradeType.MovementSpeed:

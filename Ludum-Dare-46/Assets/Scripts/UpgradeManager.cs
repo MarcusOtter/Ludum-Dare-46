@@ -23,6 +23,9 @@ public class UpgradeManager : MonoBehaviour
         }
     }
 
+
+
+
     /// <summary>
     /// Returns random upgrade from the available upgrades list and removes it from the list afterwards
     /// </summary>
