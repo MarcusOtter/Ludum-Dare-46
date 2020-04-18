@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-[RequireComponent(typeof(Collider2D))]
+[RequireComponent(typeof(Collider2D), typeof(UpgradeManager))]
 public class PlayerAttributes : MonoBehaviour, IDamageable
 {
     internal static Action OnDeath;

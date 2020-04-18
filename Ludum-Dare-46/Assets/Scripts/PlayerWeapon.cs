@@ -4,7 +4,7 @@ using Random = UnityEngine.Random;
 
 public class PlayerWeapon : Weapon
 {
-    internal static event EventHandler OnWeaponFire;
+    internal static event Action<PlayerWeapon> OnWeaponFire;
 
     [Header("Player weapon settings")]
     [SerializeField] internal Transform ShellCasingSpawnPoint;
@@ -97,7 +97,7 @@ public class PlayerWeapon : Weapon
     {
         if (!_canShoot) { return; }
 
-        OnWeaponFire?.Invoke(this, EventArgs.Empty);
+        OnWeaponFire?.Invoke(this);
 
         AudioManager.Instance.PlaySoundEffect(ShootSound);
 

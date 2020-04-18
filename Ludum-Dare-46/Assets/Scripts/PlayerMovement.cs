@@ -1,12 +1,8 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
-
-[RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(Rigidbody2D), typeof(PlayerAttributes))]
 public class PlayerMovement : MonoBehaviour
 {
-    [SerializeField] private float _movementSpeed = 1f;
-
     private PlayerInput _input;
     private Rigidbody2D _rigidbody;
 
@@ -36,12 +32,10 @@ public class PlayerMovement : MonoBehaviour
         _recoilKnockbackVector = Vector2.zero;
     }
 
-    private void AddRecoilKnockback(object sender, EventArgs args)
+    private void AddRecoilKnockback(PlayerWeapon sender)
     {
-        var weapon = (PlayerWeapon)sender;
-        var knockbackDirection = weapon.AimDirection * -1;
-
-        _recoilKnockbackVector = knockbackDirection * weapon.RecoilKnockbackForce;
+        var knockbackDirection = sender.AimDirection * -1;
+        _recoilKnockbackVector = knockbackDirection * sender.RecoilKnockbackForce;
     }
 
     private void OnDisable()

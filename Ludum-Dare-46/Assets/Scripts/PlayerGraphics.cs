@@ -82,13 +82,13 @@ public class PlayerGraphics : MonoBehaviour
     }
 
     // Makes the player jump whenever a bullet is fired from the player weapon
-    private void TriggerSkip(object sender, EventArgs args)
+    private void TriggerSkip(PlayerWeapon sender)
     {
-        if (_bodyAnimator == null) { return; }
+        if (_bodyAnimator == null || string.IsNullOrEmpty(_skipTriggerName)) { return; }
         _bodyAnimator.SetTrigger(_skipTriggerHash);
     }
 
-    private void TriggerWeaponRecoil(object sender, EventArgs args)
+    private void TriggerWeaponRecoil(PlayerWeapon sender)
     {
         if (_weaponAnimator == null) { return; }
         _weaponAnimator.SetTrigger(_recoilTriggerHash);
