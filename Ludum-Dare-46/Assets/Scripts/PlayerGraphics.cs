@@ -18,6 +18,7 @@ public class PlayerGraphics : MonoBehaviour
     [SerializeField] private string _recoilTriggerName = "TriggerRecoil";
 
     [Header("Movement animation")]
+    [SerializeField] private SpriteRenderer _headSpriteRenderer;
     [SerializeField] private string _speedParameterName = "Speed";
     [SerializeField] private string _skipTriggerName = "TriggerSkip";
 
@@ -66,8 +67,8 @@ public class PlayerGraphics : MonoBehaviour
             ? _sortInFrontNumber
             : _sortBehindNumber;
 
-        // Set the flipY of gun sprite
         _weaponSpriteRenderer.flipY = _rotationZ < 180;
+        _headSpriteRenderer.flipX = _rotationZ < 180;
 
         // Flip the weapon spawner offset (for weapons that don't spawn from the middle of the sprite)
         _bulletSpawnPoint.localPosition =
