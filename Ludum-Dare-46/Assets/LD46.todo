@@ -39,63 +39,65 @@ For example, if you get increased movement speed you would want that middle part
 Music and sound effects would be good
 
 The plant meter is the health bar, and it depletes when you get shot or stand in the shadows.
+Old idea:
+    To do Saturday:
 
-To do Saturday:
+        Marcus:
+            ✔ Player movement
+            ✔ Player camera
+            ✔ Player shooting
 
-    Marcus:
-        ✔ Player movement
-        ✔ Player camera
-        ✔ Player shooting
+        Irma:
+            ✔ Player graphics
+            ✔ Planet graphics
+            ☐ Plant graphics
+                ☐ Small little sprout as a top graphic on plant
 
-    Irma:
-        ✔ Player graphics
-        ✔ Planet graphics
-        ☐ Plant graphics
-            ☐ Small little sprout as a top graphic on plant
+        Daniel:
+            ✔ Upgrade system
+            ✔ Plant meter
 
-    Daniel:
-        ✔ Upgrade system
-        ✔ Plant meter
+        Co-programming:
+            ✔ Clouds and lighting
 
-    Co-programming:
-        ✔ Clouds and lighting
+    To do Sunday:
 
-To do Sunday:
+        Marcus:
+            ✔ Plant stacking
+            ☐ Enemy behaviour
+            ☐ Make individual plant parts collect sun energy
+            ☐ Make plant grow from pot instead of middle
+            ☐ Music
 
-    Marcus:
-        ✔ Plant stacking
-        ☐ Enemy behaviour
-        ☐ Music
+        Daniel:
+            ☐ Add upgrades
+            ☐ Difficulty scaling
 
-    Daniel:
-        ☐ Add upgrades
-        ☐ Difficulty scaling
+        Irma:
+            ☐ Enemy graphics
+            ☐ Player bullets
+            ☐ Enemy bullets
+            ☐ Plant meter graphics
+                ☐ Icons that indicate death and upgrade
 
-    Irma:
-        ☐ Enemy graphics
-        ☐ Player bullets
-        ☐ Enemy bullets
-        ☐ Plant meter graphics
-            ☐ Icons that indicate death and upgrade
+        Anyone:
+            ☐ Sound effects
+                ☐ Player bullet shoot
+                ☐ Player walk
+                ☐ Enemy bullet shoot
+                ☐ Enemy take damage
 
-    Anyone:
-        ☐ Sound effects
-            ☐ Player bullet shoot
-            ☐ Player walk
-            ☐ Enemy bullet shoot
-            ☐ Enemy take damage
+        ☐ Highscores?
+            Parse as json, upload to some service, download and parse
 
-    ☐ Highscores?
-        Parse as json, upload to some service, download and parse
+        Tweaks to make the game more fun imo:
+            ✔ Make the plant meter decrease if any part of the plant is inside the shadow (bigger plant over time -> more difficult)
+            ☐ Make the camera zoom out the bigger your plant is so you can see it? (But should be capped, also harder to aim over time)
+            ☐ Have things in the environment that you want to interact with, maybe you need to go to a water place and collect water before getting upgrade
+                Because right now there's no real incentive to like walk into the shadows like ever is there?
+                Unless we make the enemies really strong or something
 
-    Tweaks to make the game more fun imo:
-        ✔ Make the plant meter decrease if any part of the plant is inside the shadow (bigger plant over time -> more difficult)
-        ☐ Make the camera zoom out the bigger your plant is so you can see it? (But should be capped, also harder to aim over time)
-        ☐ Have things in the environment that you want to interact with, maybe you need to go to a water place and collect water before getting upgrade
-            Because right now there's no real incentive to like walk into the shadows like ever is there?
-            Unless we make the enemies really strong or something
-
-To do Monday:
+    To do Monday:
     ☐ Build actual level
     ☐ Playtesting and tweaking difficulty scaling
         Perhaps the energy meter should go slower and slower for each level to build up? Only marginally
@@ -103,3 +105,55 @@ To do Monday:
     ☐ Game name
     ☐ Menu UI + graphics
     ☐ Destructible objects in scene + graphics
+
+
+
+Game remake:
+    We're remaking the game because the old game didn't make much sense
+    and wasn't super fun.
+
+    You are now supposed to protect a sacred plant in the middle of the level
+    You protect it by planting different plant species that you have to water and grow
+    Basically plants vs zombies except you can move around
+
+    ☐ Inventory system for seeds
+    ☐ Pick up seeds & add to inventory
+    ☐ Plant the seed
+    ☐ Plant grow and plant behaviour
+        ☐ Gun plant - shoots enemies nearby but needs ammo
+        ☐ Ammo plant - gives ammo to nearby plants
+        ☐ Cactus - Shoots in a circle around it short range
+        ☐ Red plant - Heals plants in the area
+        ☐ Green plant - Efficiency bonus for plants in the area
+    ☐ Get water from clouds (they rain)
+    ☐ If the cloud is over the plant it's meter fills up automatically
+    ☐ Make the water shooting gun
+    ☐ Maybe show area of effect on plants when you plant and show it when you hover over it with mouse
+    ☐ Seed drop when plant finished growing & enemies dies with probability
+    ☐ Enemies that target the middle plant primarily but smaller plants if in close perimiter
+    ☐ Make the middle sacred plant waterable
+    ☐ Enemies are stunned when you shoot water on them for x amount time
+    ☐ Make the cloud edges blurry
+    ☐ Add rain to clouds (blue particles under it)
+    ☐ When you walk under a cloud, start slowly scaling it down and fill up water
+    ☐ Water meter on the right side
+    ☐ Music
+
+    Scripts:
+        ☐ IWaterable
+        ☐ Abstract plant remake
+            ☐ One implementation for every plant
+        ☐ Seed
+        ☐ PlantType
+        ☐ Rip out most of the logic in the PlayerAttributes
+        ☐ Player weapon remake to water gun
+
+
+    Graphics:
+        ☐ Sacred plant
+        ☐ Water meter
+        ☐ Inventory grid things
+        ☐ Helmet vacuum cloud sucker thing
+        ☐ Seeds for every flower type
+        ☐ Projectiles for flowers
+

@@ -51,8 +51,8 @@ public class Plant : MonoBehaviour
     {
         var totalPlantPieces = _middlePlantPiecesParent.childCount + 2; // Top and bottom
 
-        _collider.offset = _collider.offset.With(y: (totalPlantPieces * _singlePlantPieceSize) / 2 + 0.5f);
-        _collider.size = _collider.size.With(y: totalPlantPieces * _singlePlantPieceSize - 1f);
+        _collider.offset = _collider.offset.With(y: (totalPlantPieces * _singlePlantPieceSize) / 2);
+        _collider.size = _collider.size.With(y: totalPlantPieces * _singlePlantPieceSize - 2f);
     }
 
     private void Start()
