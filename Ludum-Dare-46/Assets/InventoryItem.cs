@@ -4,10 +4,15 @@ using UnityEngine.UI;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
+using TMPro;
 
 
 public class InventoryItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
+    [SerializeField] private Color outlineHoverColor;
+
+    internal bool selected;
+
     public UnityEvent OnHover;
     public UnityEvent OnStopHover;
     private Outline outline;
@@ -27,12 +32,28 @@ public class InventoryItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
     private void Start()
     {
+
         button = GetComponent<Button>();
         outline = GetComponent<Outline>();
         inventory = GetComponentInParent<PlayerInventory>();
         if (inventory == null) print("null inventory");
         button.onClick.AddListener(EquipThis);
 
+        transform.localScale = Vector2.right;
+
+        LeanTween.scaleY(gameObject, 1f, easeTime);
+
+        outline.effectColor = Color.black;
+    }
+
+    public void SetCounter(int counter)
+    {
+        transform.GetChild(2).GetComponentInChildren<TextMeshProUGUI>().SetText(counter.ToString());
+    }
+
+    public void SetUISprite(Sprite sprite)
+    {
+        transform.GetChild(1).GetComponent<Image>().sprite = sprite;
     }
 
     public void EquipThis()
@@ -53,7 +74,7 @@ public class InventoryItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
         OnHover.Invoke();
         ScaleButton(true);
-        LeanTween.value(gameObject, outline.effectColor, Color.yellow, easeTime).setOnUpdate(SetOutlineColor);
+        LeanTween.value(gameObject, outline.effectColor, outlineHoverColor, easeTime).setOnUpdate(SetOutlineColor);
     }
 
     public void OnPointerExit(PointerEventData eventData)
@@ -62,7 +83,7 @@ public class InventoryItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
         OnStopHover.Invoke();
         ScaleButton(false);
-        LeanTween.value(gameObject, outline.effectColor, Color.white, easeTime).setOnUpdate(SetOutlineColor);
+        LeanTween.value(gameObject, outline.effectColor, Color.black, easeTime).setOnUpdate(SetOutlineColor);
     }
 
     private void SetOutlineColor(Color c)

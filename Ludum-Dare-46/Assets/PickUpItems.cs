@@ -17,6 +17,7 @@ public class PickUpItems : MonoBehaviour
         if (seed != null)
         {
             inventory?.PickUp(seed, 1);
+            Destroy(seed.gameObject);
         }
     }
 }
