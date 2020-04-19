@@ -19,6 +19,8 @@ public class InventoryItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     private float maxScale = 1.2f;
     internal readonly static float easeTime = 0.2f;
 
+    public static bool hoveringBox;
+
     private RectTransform textBox;
 
     internal Seed selsctedSeed;
@@ -46,6 +48,9 @@ public class InventoryItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
     public void OnPointerEnter(PointerEventData eventData)
     {
+
+        hoveringBox = true;
+
         OnHover.Invoke();
         ScaleButton(true);
         LeanTween.value(gameObject, outline.effectColor, Color.yellow, easeTime).setOnUpdate(SetOutlineColor);
@@ -53,6 +58,8 @@ public class InventoryItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
     public void OnPointerExit(PointerEventData eventData)
     {
+        hoveringBox = false;
+
         OnStopHover.Invoke();
         ScaleButton(false);
         LeanTween.value(gameObject, outline.effectColor, Color.white, easeTime).setOnUpdate(SetOutlineColor);
