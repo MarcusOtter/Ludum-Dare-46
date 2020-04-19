@@ -1,161 +1,121 @@
 ﻿using System;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
-public class PlayerWeapon : Weapon
+[RequireComponent(typeof(LineRenderer))]
+public class PlayerWeapon : MonoBehaviour
 {
     internal static event Action<PlayerWeapon> OnWeaponFire;
 
     [Header("Player weapon settings")]
-    [SerializeField] internal Transform ShellCasingSpawnPoint;
     [SerializeField] internal float RecoilKnockbackForce = 10;
 
-    private Transform _parentTransform;
+    [Header("Water settings")]
+    [SerializeField] private int _numberOfPoints = 10;
+    [SerializeField] private float _arcHeight = 2f;
+    [SerializeField] private float _minRange = 2f;
+    [SerializeField] private float _maxRange = 10f;
+    [SerializeField] private WaterArea _splashPrefab;
+
+    internal Vector2 AimDirection { get; private set; }
 
     private PlayerInput _userInput;
+    private LineRenderer _waterRenderer;
+    private Transform _weaponPivot;
 
-    private int _bulletsFiredThisHold; // How many bullets that have been fired during this mouse press
+    private WaterArea _spawnedSplash;
 
-    private float _holdStartTime;
     private bool _attackBeingHeld;
-
-    private float _lastBulletSpawnTime;
-
-    private bool _fireWhenPossible;
-
     private bool _canShoot = true;
 
     private void OnEnable()
     {
         _userInput = PlayerInput.Instance;
+        _weaponPivot = transform.parent;
+        _waterRenderer = GetComponent<LineRenderer>();
 
-        _parentTransform = transform.parent;
         _userInput.OnAttackKeyDown += RegisterAttackKeyDown;
         _userInput.OnAttackKeyUp += RegisterAttackKeyUp;
-
-        PlayerAttributes.OnLevelUp += ChangeBullet;
     }
 
-    private void ChangeBullet(int level, Upgrade upgrade)
-    {
-        if (upgrade.Type != UpgradeType.Bullet) { return; }
-
-        if (upgrade.BulletPrefab == null)
-        {
-            Debug.LogError($"The upgrade {upgrade.name} is of type bullet but has no bullet prefab attached.");
-            return;
-        }
-
-        BulletPrefabToSpawn = upgrade.BulletPrefab;
-    }
-
-    protected override void WeaponBehaviour()
+    private void Update()
     {
         RotateTowardsMouse();
 
-        if (!_canShoot) { return; }
-
-        // Spawn a bullet if there is one that is queued to be spawned
-        if (_fireWhenPossible && _lastBulletSpawnTime + ShootDelay < Time.time)
+        if (!_canShoot || !_attackBeingHeld) 
         {
-            SpawnBullet();
-            _fireWhenPossible = false;
+            _waterRenderer.enabled = false;
+            return; 
         }
 
-        if (!_attackBeingHeld) { return; }
-
-        SprayBullets();
+        _waterRenderer.enabled = true;
+        SprayWater();
     }
 
-    /// <summary>Spawns a bullet when the attack key is being held </summary>
-    private void SprayBullets()
+    private void SprayWater()
     {
-        if (Time.time - (_holdStartTime + _bulletsFiredThisHold * ShootDelay) > ShootDelay)
+        _waterRenderer.positionCount = _numberOfPoints;
+
+        var startPoint = transform.position;
+        var endPoint = _userInput.MouseWorldPosition.With(z: 0);
+
+        var distance = Vector3.Magnitude(endPoint - startPoint);
+        var scaledArcHeight = _arcHeight * distance;
+
+        if (distance <= _minRange) 
         {
-            SpawnBullet();
-            _bulletsFiredThisHold++;
+            _waterRenderer.enabled = false;
+            return;
+        }
+        else if (distance >= _maxRange)
+        {
+            endPoint = startPoint + Vector3.ClampMagnitude(endPoint - startPoint, _maxRange);
+
+            // Recalculate arc scale
+            distance = Vector3.Magnitude(endPoint - startPoint);
+            scaledArcHeight = _arcHeight * distance;
+        }
+
+        var middlePoint = Vector3.Lerp(startPoint, endPoint, 0.5f).Add(y: scaledArcHeight);
+
+        for (int i = 0; i < _numberOfPoints; i++)
+        {
+            float t = i / (float) (_numberOfPoints - 1);
+            Vector3 position = (1 - t) * (1 - t) * startPoint + 2 * (1 - t) * t * middlePoint + t * t * endPoint;
+            _waterRenderer.SetPosition(i, position);
+        }
+
+        if (_spawnedSplash != null)
+        {
+            _spawnedSplash.transform.position = endPoint;
         }
     }
 
     private void RotateTowardsMouse()
     {
-        AimDirection = (_userInput.MouseWorldPosition - _parentTransform.position).normalized;
-        _parentTransform.up = AimDirection;
+        AimDirection = (_userInput.MouseWorldPosition - _weaponPivot.position).normalized;
+        _weaponPivot.up = AimDirection;
     }
 
     private void RegisterAttackKeyDown(PlayerInput sender)
     {
-        _holdStartTime = Time.time;
         _attackBeingHeld = true;
-
-        if (_lastBulletSpawnTime + ShootDelay > Time.time)
+        if (_spawnedSplash != null)
         {
-            // The player has pressed the attack key prematurely. 
-            // This bullet will automatically be spawned when it can be.
-            _fireWhenPossible = true;
+            Destroy(_spawnedSplash.gameObject);
         }
-        else
-        {
-            SpawnBullet();
-        }
+        _spawnedSplash = Instantiate(_splashPrefab, sender.MouseWorldPosition, Quaternion.identity);
     }
 
     private void RegisterAttackKeyUp(PlayerInput sender)
     {
         _attackBeingHeld = false;
-        _bulletsFiredThisHold = 0;
-    }
-
-    private void SpawnBullet()
-    {
-        if (!_canShoot) { return; }
-
-        OnWeaponFire?.Invoke(this);
-
-        AudioManager.Instance.PlaySoundEffect(ShootSound);
-
-        Instantiate(BulletPrefabToSpawn, transform.position, GetRandomOffsetBulletRotation()).Shoot(BulletDamage, BulletSpeed);
-        Instantiate(MuzzleFlash, transform.position, transform.rotation);
-        _lastBulletSpawnTime = Time.time;
-    }
-
-    //Enable or disable shooting(called by unity events in tutorial)
-    //public void EnableShooting(bool enable)
-    //{
-    //    if (_canShoot == enable) { return; }
-
-    //    _canShoot = enable;
-
-    //    if (!_canShoot)
-    //    {
-    //        _fireWhenPossible = false;
-    //        RegisterAttackKeyUp(this, EventArgs.Empty);
-    //    }
-    //}
-
-    /// <summary>
-    /// Calculates a rotation with a random offset that depends on the <see cref="Weapon.Accuracy"/>.
-    /// </summary>
-    private Quaternion GetRandomOffsetBulletRotation()
-    {
-        // If the accuracy is 1, the bullet will always go in a straight line.
-        if (Mathf.Approximately(Accuracy, 1f))
-        {
-            return transform.rotation;
-        }
-
-        // With 0 accuracy, the offset can be between -45 degrees and + 45 degrees.
-        // With 0.5 accuracy, the offset can be between -22.5 degrees and + 22.5 degrees.
-        // (etc)
-        var randomOffsetDegrees = Random.Range((1 - Accuracy) * -45, (1 - Accuracy) * 45);
-        return Quaternion.AngleAxis(randomOffsetDegrees, Vector3.forward) * transform.rotation;
+        Destroy(_spawnedSplash.gameObject);
     }
 
     private void OnDisable()
     {
         _userInput.OnAttackKeyDown -= RegisterAttackKeyDown;
         _userInput.OnAttackKeyUp -= RegisterAttackKeyUp;
-        PlayerAttributes.OnLevelUp -= ChangeBullet;
     }
 }
 
