@@ -49,7 +49,7 @@ To do Saturday:
 
     Irma:
         ✔ Player graphics
-        ☐ Planet graphics
+        ✔ Planet graphics
         ☐ Plant graphics
             ☐ Small little sprout as a top graphic on plant
 
@@ -61,15 +61,30 @@ To do Saturday:
         ✔ Clouds and lighting
 
 To do Sunday:
-    ✔ Plant stacking
-    ☐ Add upgrades
-    ☐ Enemy behaviour
-    ☐ Enemy graphics
-    ☐ Difficulty scaling
-    ☐ Plant meter graphics
-        Icons that indicate death and upgrade?
-    ☐ Music
-    ☐ Sound effects for enemies
+
+    Marcus:
+        ✔ Plant stacking
+        ☐ Enemy behaviour
+        ☐ Music
+
+    Daniel:
+        ☐ Add upgrades
+        ☐ Difficulty scaling
+
+    Irma:
+        ☐ Enemy graphics
+        ☐ Player bullets
+        ☐ Enemy bullets
+        ☐ Plant meter graphics
+            ☐ Icons that indicate death and upgrade
+
+    Anyone:
+        ☐ Sound effects
+            ☐ Player bullet shoot
+            ☐ Player walk
+            ☐ Enemy bullet shoot
+            ☐ Enemy take damage
+
     ☐ Highscores?
         Parse as json, upload to some service, download and parse
 
