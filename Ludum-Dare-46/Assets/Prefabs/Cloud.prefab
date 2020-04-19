@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 8136329057633488689}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 3.125, y: 3.125, z: 1}
   m_Children: []
   m_Father: {fileID: 9219204478169352823}
   m_RootOrder: 0
@@ -57,14 +57,14 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 0.8442503, y: 1.3574165}
+    - - {x: 0.9769287, y: 1.5149717}
       - {x: -0.6511982, y: 1.1995611}
       - {x: -0.5840651, y: 0.5197567}
       - {x: -0.9825665, y: 0.27750716}
       - {x: -0.9536945, y: -0.25705492}
       - {x: -1.9738601, y: -0.7227649}
       - {x: -1.1969709, y: -1.3446804}
-      - {x: -0.09492288, y: -1.6702797}
+      - {x: -0.12013061, y: -1.8228747}
       - {x: 2.0580432, y: -0.9642997}
       - {x: 1.4092463, y: -0.1512847}
       - {x: 2.2657406, y: 0.33277652}
@@ -110,7 +110,7 @@ Transform:
   m_GameObject: {fileID: 9219204478169352820}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 10, y: 10, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 3385373541545672894}
   m_Father: {fileID: 0}
@@ -199,7 +199,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 466610d92ddaede46a9ddd9b24d64675, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _minVelocity: 0
+  _minVelocity: 1
   _maxVelocity: 5
   _minAngularVelocity: -20
   _maxAngularVelocity: 20
