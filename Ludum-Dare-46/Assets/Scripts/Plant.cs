@@ -1,91 +1,46 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
-[RequireComponent(typeof(BoxCollider2D))]
-public class Plant : MonoBehaviour
+[RequireComponent(typeof(Collider2D))]
+public abstract class Plant : MonoBehaviour, IWaterable, IDamageable
 {
-    [Header("Plant meter")]
-    [SerializeField] private float _plantMeterChargeRate = 0.05f;
-    [SerializeField] private float _plantMeterDepletionRate = 0.1f;
+    [Header("General plant settings")]
+    [SerializeField] private PlantType _plantType;
 
-    [Header("Plant parts")]
-    [SerializeField] private float _singlePlantPieceSize = 2f;
-    [SerializeField] private Transform _middlePlantPiecesParent;
-    [SerializeField] private Transform _topPlantPiece;
-    [SerializeField] private SpriteRenderer _middlePlantPiecePrefab;
+    [SerializeField] private float _seedlingMaxHealth;
+    [SerializeField] private float _seedlingStartHealth;
 
-    private BoxCollider2D _collider;
-    private PlayerAttributes _playerAttributes;
-
-    private int _cloudCount;
+    private GrowthStage _growthStage;
+    private float _health;
 
     private void Awake()
     {
-        _collider = GetComponent<BoxCollider2D>();
-        UpdateColliderSize();
+        _growthStage = GrowthStage.Seedling;
+        _health = _seedlingStartHealth;
     }
 
-    private void OnEnable()
+    private void ModifyHealth(float amount)
     {
-        PlayerAttributes.OnLevelUp += AddPlantPiece;
-    }
+        _health += amount;
 
-    private void AddPlantPiece(int level, Upgrade newUpgrade)
-    {
-        if (newUpgrade.PlantUpgradeSprite == null)
+        if (_health == 0)
         {
-            Debug.LogError($"The upgrade \"{newUpgrade.name}\" does not contain a plant upgrade sprite.");
+            // Die
             return;
         }
 
-        var newPlantPosition = _topPlantPiece.position;
-
-        var newPlantPartRenderer = Instantiate(_middlePlantPiecePrefab, newPlantPosition, Quaternion.identity, _middlePlantPiecesParent);
-        newPlantPartRenderer.sprite = newUpgrade.PlantUpgradeSprite;
-
-        _topPlantPiece.position = _topPlantPiece.position.Add(y: _singlePlantPieceSize);
-        UpdateColliderSize();
-    }
-
-    private void UpdateColliderSize()
-    {
-        var totalPlantPieces = _middlePlantPiecesParent.childCount + 2; // Top and bottom
-
-        _collider.offset = _collider.offset.With(y: (totalPlantPieces * _singlePlantPieceSize) / 2);
-        _collider.size = _collider.size.With(y: totalPlantPieces * _singlePlantPieceSize - 2f);
-    }
-
-    private void Start()
-    {
-        _playerAttributes = FindObjectOfType<PlayerAttributes>();
-    }
-
-    private void FixedUpdate()
-    {
-        if (_playerAttributes == null) { return; }
-
-        var plantMeterDelta = _cloudCount < 1 ? _plantMeterChargeRate : -_plantMeterDepletionRate;
-        _playerAttributes.ChangePlantMeter(plantMeterDelta * Time.fixedDeltaTime);
-    }
-
-    private void OnTriggerEnter2D(Collider2D collider)
-    {
-        if (collider.GetComponent<Cloud>() != null)
+        if (_growthStage == GrowthStage.Seedling && _health >= _seedlingMaxHealth)
         {
-            _cloudCount++;
+            // Upgrade
         }
     }
 
-    private void OnTriggerExit2D(Collider2D collider)
+    public void HitByWaterBehaviour(float waterAmount)
     {
-        if (collider.GetComponent<Cloud>() != null)
-        {
-            _cloudCount--;
-        }
+        _health += waterAmount;
     }
 
-    private void OnDisable()
+    public void TakeDamage(float incomingDamage)
     {
-        PlayerAttributes.OnLevelUp -= AddPlantPiece;
+        _health -= incomingDamage;
     }
 }
