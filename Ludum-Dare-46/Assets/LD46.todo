@@ -51,6 +51,7 @@ To do Saturday:
         ✔ Player graphics
         ☐ Planet graphics
         ☐ Plant graphics
+            ☐ Small little sprout as a top graphic on plant
 
     Daniel:
         ✔ Upgrade system
@@ -62,12 +63,13 @@ To do Saturday:
 To do Sunday:
     ✔ Plant stacking
     ☐ Add upgrades
+    ☐ Enemy behaviour
+    ☐ Enemy graphics
+    ☐ Difficulty scaling
+    ☐ Plant meter graphics
+        Icons that indicate death and upgrade?
     ☐ Music
     ☐ Sound effects for enemies
-    ☐ Enemy graphics
-    ☐ Plant meter graphics
-    ☐ Enemy behaviour
-    ☐ Difficulty scaling
     ☐ Highscores?
         Parse as json, upload to some service, download and parse
 
