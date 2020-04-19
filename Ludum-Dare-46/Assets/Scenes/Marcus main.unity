@@ -4078,6 +4078,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 5336364394394332995, guid: bbb0c5d0b4b9a4244a520f204fcd5771,
         type: 3}
+    - target: {fileID: 4806920484522029576, guid: b7eaf5a65b864a2459bf1e6e57f3c144,
+        type: 3}
+      propertyPath: _waterConsumptionPerSecond
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4806920484522029577, guid: b7eaf5a65b864a2459bf1e6e57f3c144,
         type: 3}
       propertyPath: m_LocalPosition.y

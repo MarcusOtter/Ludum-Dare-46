@@ -10,10 +10,11 @@ public class PlayerWeapon : MonoBehaviour
     [SerializeField] internal float RecoilKnockbackForce = 10;
 
     [Header("Water settings")]
+    [SerializeField] private float _waterConsumptionPerSecond = 2f;
     [SerializeField] private int _numberOfPoints = 10;
-    [SerializeField] private float _arcHeight = 2f;
-    [SerializeField] private float _minRange = 2f;
-    [SerializeField] private float _maxRange = 10f;
+    [SerializeField] private float _arcHeight = 0.3f;
+    [SerializeField] private float _minRange = 0f;
+    [SerializeField] private float _maxRange = 7f;
     [SerializeField] private WaterArea _splashPrefab;
 
     internal Vector2 AimDirection { get; private set; }
@@ -47,8 +48,12 @@ public class PlayerWeapon : MonoBehaviour
             return; 
         }
 
+        // If you don't have enough water, return
+
         _waterRenderer.enabled = true;
         SprayWater();
+
+        // Deplete water with water consumption per second * Time.deltaTime
     }
 
     private void SprayWater()
@@ -104,6 +109,7 @@ public class PlayerWeapon : MonoBehaviour
             Destroy(_spawnedSplash.gameObject);
         }
         _spawnedSplash = Instantiate(_splashPrefab, sender.MouseWorldPosition, Quaternion.identity);
+        _spawnedSplash.SetWaterConsumptionPerSecond(_waterConsumptionPerSecond);
     }
 
     private void RegisterAttackKeyUp(PlayerInput sender)
