@@ -126,7 +126,7 @@ Game remake:
         ☐ Red plant - Heals plants in the area
         ☐ Green plant - Efficiency bonus for plants in the area
     ☐ Get water from clouds (they rain)
-    ☐ If the cloud is over the plant it's meter fills up automatically
+    ✔ If the cloud is over the plant it's meter fills up automatically
     ☐ Make the water shooting gun
     ☐ Maybe show area of effect on plants when you plant and show it when you hover over it with mouse
     ☐ Seed drop when plant finished growing & enemies dies with probability
@@ -147,13 +147,14 @@ Game remake:
         ✔ PlantType
         ☐ Rip out most of the logic in the PlayerAttributes
         ☐ Player weapon remake to water gun
-        ☐ Remake clouds to rain on IWaterables and be able to be sucked up
+        ✔ Remake clouds to rain on IWaterables
+        ☐ Make clouds be suckable
 
     Graphics:
-        ☐ Sacred plant
+        ✔ Sacred plant
         ☐ Water meter
         ☐ Inventory grid things
-        ☐ Helmet vacuum cloud sucker thing
-        ☐ Seeds for every flower type
+        ✔ Helmet vacuum cloud sucker thing
+        ✔ Seeds for every flower type
         ☐ Projectiles for flowers
 

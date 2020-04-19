@@ -8,15 +8,18 @@ public abstract class Plant : MonoBehaviour, IWaterable, IDamageable
     [SerializeField] internal string Name;
     [SerializeField] internal string Description;
 
+    [Header("Health")]
     [SerializeField] protected float FullyGrownMaxHealth = 20f;
     [SerializeField] private float _seedlingMaxHealth = 5f;
     [SerializeField] private float _seedlingStartHealth = 1f;
 
-    [SerializeField] private SpriteRenderer _spriteRenderer;
+    [Header("Sprites")]
     [SerializeField] private Sprite _deadSprite;
     [SerializeField] private Sprite _seedlingSprite;
     [SerializeField] private Sprite _fullyGrownSprite;
 
+    [Header("References")]
+    [SerializeField] private SpriteRenderer _spriteRenderer;
     [SerializeField] private HealthBar _healthBar; 
 
     protected float Efficiency { get; private set; }

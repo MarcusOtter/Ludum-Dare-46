@@ -8,6 +8,11 @@ public class WaterArea : MonoBehaviour
 
     private List<IWaterable> _waterablesInWaterArea = new List<IWaterable>();
 
+    internal void SetWaterConsumptionPerSecond(float newValue)
+    {
+        _waterPerSecond = newValue;
+    }
+
     private void Update()
     {
         foreach(var waterable in _waterablesInWaterArea)
@@ -19,6 +24,7 @@ public class WaterArea : MonoBehaviour
             }
 
             waterable.Water(_waterPerSecond * Time.deltaTime);
+            print("Watering " + waterable.ToString());
         }
     }
 
