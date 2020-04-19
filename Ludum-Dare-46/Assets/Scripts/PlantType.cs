@@ -4,5 +4,6 @@
     Ammo,
     Cactus,
     Heal,
-    Efficiency
+    Efficiency,
+    Sacred
 }
