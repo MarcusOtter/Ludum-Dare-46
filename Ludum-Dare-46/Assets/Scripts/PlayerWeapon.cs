@@ -42,7 +42,7 @@ public class PlayerWeapon : MonoBehaviour
     {
         RotateTowardsMouse();
 
-        if (!_canShoot || !_attackBeingHeld) 
+        if (!_canShoot || !_attackBeingHeld || InventoryItem.hoveringBox) 
         {
             _waterRenderer.enabled = false;
             return; 
