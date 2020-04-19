@@ -3,17 +3,26 @@
 [RequireComponent(typeof(Rigidbody2D))]
 public class Cloud : MonoBehaviour
 {
-    internal static Vector2 _movementDirection = new Vector2(3, 1);
+    internal static Vector2 MovementDirection = new Vector2(3, 1);
 
-    [SerializeField] [Range(0f, 5f)] private float _velocity;
-    [SerializeField] [Range(-20f, 20f)] private float _angularVelocity;
+    [SerializeField] private float _minVelocity = 0f;
+    [SerializeField] private float _maxVelocity = 5f;
+
+    [SerializeField] private float _minAngularVelocity = -20f;
+    [SerializeField] private float _maxAngularVelocity = 20f;
 
     private Rigidbody2D _rigidbody;
 
     private void Awake()
     {
+        var velocity = Random.Range(_minVelocity, _maxVelocity);
+        var angularVelocity = Random.Range(_minAngularVelocity, _maxAngularVelocity);
+
         _rigidbody = GetComponent<Rigidbody2D>();
-        _rigidbody.velocity = _movementDirection.normalized * _velocity;
-        _rigidbody.angularVelocity = _angularVelocity;
+        _rigidbody.gravityScale = 0;
+        _rigidbody.angularDrag = 0;
+        _rigidbody.drag = 0;
+        _rigidbody.velocity = MovementDirection.normalized * velocity;
+        _rigidbody.angularVelocity = angularVelocity;
     }
 }

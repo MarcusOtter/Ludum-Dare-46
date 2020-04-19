@@ -1,4 +1,4 @@
 ﻿public interface IWaterable
 {
-    void HitByWaterBehaviour(float waterAmount);
+    void Water(float waterAmount);
 }

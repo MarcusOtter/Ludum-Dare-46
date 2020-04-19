@@ -140,14 +140,14 @@ Game remake:
     ☐ Music
 
     Scripts:
-        ☐ IWaterable
-        ☐ Abstract plant remake
-            ☐ One implementation for every plant
+        ✔ IWaterable
+        ✔ Abstract plant remake
+        ☐ One implementation for every plant
         ☐ Seed
-        ☐ PlantType
+        ✔ PlantType
         ☐ Rip out most of the logic in the PlayerAttributes
         ☐ Player weapon remake to water gun
-
+        ☐ Remake clouds to rain on IWaterables and be able to be sucked up
 
     Graphics:
         ☐ Sacred plant
