@@ -146,15 +146,24 @@ Game remake:
         ☐ Seed
         ✔ PlantType
         ☐ Rip out most of the logic in the PlayerAttributes
-        ☐ Player weapon remake to water gun
+        ✔ Player weapon remake to water gun
         ✔ Remake clouds to rain on IWaterables
         ☐ Make clouds be suckable
+        ☐ Remake enemies
+        ☐ Push enemies with water
 
     Graphics:
         ✔ Sacred plant
-        ☐ Water meter
+        ✔ Water meter
         ☐ Inventory grid things
         ✔ Helmet vacuum cloud sucker thing
         ✔ Seeds for every flower type
-        ☐ Projectiles for flowers
+        ✔ Projectiles for flowers
+        ☐ Water sploosh
+        ☐ Rain droplet
+
+
+    To discuss:
+        Do you press a button to suck up the clouds or does it just happen
+
 

@@ -24,7 +24,6 @@ public class WaterArea : MonoBehaviour
             }
 
             waterable.Water(_waterPerSecond * Time.deltaTime);
-            print("Watering " + waterable.ToString());
         }
     }
 
