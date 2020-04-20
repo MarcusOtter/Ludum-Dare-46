@@ -6,6 +6,7 @@ public class PlayerInventory : MonoBehaviour
 {
     internal float CurrentWater { get; private set; }
     internal bool WaterIsFull => CurrentWater == _maxWaterAmount;
+    internal InventorySlot CurrentSelectedSlot { get; private set; }
 
     [SerializeField] private float _maxWaterAmount;
     [SerializeField] private float _startingWaterAmount;
@@ -14,7 +15,6 @@ public class PlayerInventory : MonoBehaviour
     [SerializeField] private Image _waterBarImage;
 
     private List<InventorySlot> _inventorySlots = new List<InventorySlot>();
-    private InventorySlot _currentSelectedSlot;
 
     private int _slotIndex;
 
@@ -31,10 +31,10 @@ public class PlayerInventory : MonoBehaviour
     {
         _slotIndex = i;
 
-        _currentSelectedSlot?.Item.SetSelected(false);
+        CurrentSelectedSlot?.Item.SetSelected(false);
  
-        _currentSelectedSlot = _inventorySlots[i];
-        _currentSelectedSlot.Item.SetSelected(true);
+        CurrentSelectedSlot = _inventorySlots[i];
+        CurrentSelectedSlot.Item.SetSelected(true);
         return;
     }
 
@@ -61,14 +61,14 @@ public class PlayerInventory : MonoBehaviour
 
     public void Equip(InventoryItem item)
     {
-        _currentSelectedSlot?.Item.SetSelected(false);
+        CurrentSelectedSlot?.Item.SetSelected(false);
 
         for(int i = 0; i < _inventorySlots.Count; i++)
         {
             if(item == _inventorySlots[i].Item)
             {
-                _currentSelectedSlot = _inventorySlots[i];
-                _currentSelectedSlot.Item.SetSelected(true);
+                CurrentSelectedSlot = _inventorySlots[i];
+                CurrentSelectedSlot.Item.SetSelected(true);
                 return;            
             }
         }

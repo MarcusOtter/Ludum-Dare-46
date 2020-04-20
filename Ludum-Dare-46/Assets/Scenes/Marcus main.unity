@@ -7359,24 +7359,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 9033305572867180454}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &2044660121 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4806920483182120742, guid: b7eaf5a65b864a2459bf1e6e57f3c144,
-    type: 3}
-  m_PrefabInstance: {fileID: 4806920484654865999}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &2044660122
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2044660121}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 277cc569e8ecdeb4d95ac03670898e18, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &299359471971965929
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7798,6 +7780,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2275498996654058213, guid: b7eaf5a65b864a2459bf1e6e57f3c144,
+        type: 3}
+      propertyPath: _playerInventory
+      value: 
+      objectReference: {fileID: 760390352}
     - target: {fileID: 4806920483182120741, guid: b7eaf5a65b864a2459bf1e6e57f3c144,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -7857,11 +7844,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 4806920484522029576, guid: b7eaf5a65b864a2459bf1e6e57f3c144,
-        type: 3}
-      propertyPath: _waterConsumptionPerSecond
-      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b7eaf5a65b864a2459bf1e6e57f3c144, type: 3}
