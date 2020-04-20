@@ -98,7 +98,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &7445919800196833722
 Transform:
   m_ObjectHideFlags: 0
@@ -160,8 +160,7 @@ MonoBehaviour:
   _fullyGrownMaxHealth: 20
   _seedlingMaxHealth: 10
   _seedlingStartHealth: 2
-  _deadSprite: {fileID: 8322176278309264188, guid: 4ebcbdff9da745e48948fac30ba636a0,
-    type: 3}
+  _deadSprite: {fileID: 21300000, guid: d709acc04c4e03340a6da25eb2ced2a8, type: 3}
   _seedlingSprite: {fileID: 21300000, guid: c82b29494abca3e4f9f9e32dc81b3537, type: 3}
   _fullyGrownSprite: {fileID: 21300000, guid: 861d44aeb273ab847abd4c8fd98ef16f, type: 3}
   _spriteRenderer: {fileID: 7445919799596897669}
