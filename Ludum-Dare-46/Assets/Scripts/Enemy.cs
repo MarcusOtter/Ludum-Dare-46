@@ -4,7 +4,7 @@ using System.Linq;
 using System;
 
 [RequireComponent(typeof(Rigidbody2D), typeof(Collider2D))]
-public class Enemy : MonoBehaviour, IDamageable
+public class Enemy : MonoBehaviour, IDamageable, ICircleOnHover
 {
     internal Action<EnemyState, EnemyState> OnStateChanged;
 
@@ -183,5 +183,15 @@ public class Enemy : MonoBehaviour, IDamageable
             _lastStunTime = Time.time;
             SetState(EnemyState.Stunned);
         }
+    }
+
+    public float GetRadius()
+    {
+        return _attackRadius;
+    }
+
+    public Color GetColour()
+    {
+        return Color.red;
     }
 }

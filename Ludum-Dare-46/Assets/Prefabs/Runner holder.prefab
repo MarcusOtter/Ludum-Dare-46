@@ -133,7 +133,7 @@ Rigidbody2D:
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!1 &299359473518622540
 GameObject:
@@ -349,7 +349,7 @@ Rigidbody2D:
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 7
 --- !u!1001 &299359473303213411
 PrefabInstance:
@@ -417,21 +417,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Health bar
-      objectReference: {fileID: 0}
-    - target: {fileID: 8722687135254149680, guid: 2263e30b79d6fe24eabdbac9868f32a2,
-        type: 3}
-      propertyPath: m_Color.r
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8722687135254149680, guid: 2263e30b79d6fe24eabdbac9868f32a2,
-        type: 3}
-      propertyPath: m_Color.g
-      value: 0.27058828
-      objectReference: {fileID: 0}
-    - target: {fileID: 8722687135254149680, guid: 2263e30b79d6fe24eabdbac9868f32a2,
-        type: 3}
-      propertyPath: m_Color.b
-      value: 0.27058828
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2263e30b79d6fe24eabdbac9868f32a2, type: 3}
