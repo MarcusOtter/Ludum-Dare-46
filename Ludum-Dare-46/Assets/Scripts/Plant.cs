@@ -1,10 +1,13 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
 [RequireComponent(typeof(Collider2D))]
 public abstract class Plant : MonoBehaviour, IWaterable, IDamageable, ICircleOnHover
 {
+    internal Action<GrowthStage, GrowthStage> OnGrowthStageChanged;
+
     [Header("General plant settings")]
     [SerializeField] internal PlantType PlantType;
     [SerializeField] internal string Name;
@@ -144,9 +147,13 @@ public abstract class Plant : MonoBehaviour, IWaterable, IDamageable, ICircleOnH
 
     private void SetNewGrowthStage(GrowthStage growthStage)
     {
+        OnGrowthStageChanged?.Invoke(GrowthStage, growthStage);
+
         GrowthStage = growthStage;
         _spriteRenderer.sprite = GetSpriteForGrowthStage(growthStage);
+
         // Could do particle effects here and sounds, maybe animation for sacred idk
+        // actually we have an event now so it should be separated
     }
 
     private Sprite GetSpriteForGrowthStage(GrowthStage growthStage) 
