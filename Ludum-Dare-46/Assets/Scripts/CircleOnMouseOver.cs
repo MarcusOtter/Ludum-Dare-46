@@ -14,7 +14,9 @@ public class CircleOnMouseOver : MonoBehaviour
 
     private void Start()
     {
-        _circle = transform.root.GetComponentInChildren<ICircleOnHover>();
+        _circle = transform.GetComponent<ICircleOnHover>();
+        _circle = _circle ?? transform.parent.GetComponentInChildren<ICircleOnHover>();
+
         _spawnedCircle = Instantiate(_circlePrefab, transform);
         _spawnedCircle.localScale = new Vector2(0f, 0f);
         _spawnedCircle.GetComponent<SpriteRenderer>().color = _circle.GetColour();
@@ -22,15 +24,13 @@ public class CircleOnMouseOver : MonoBehaviour
 
     private void OnMouseEnter()
     {
-        //_spawnedCircle.localScale = new Vector2(1f, 1f) * _circle.GetRadius() * 2;
-        //LeanTween.cancel(gameObject);
+        LeanTween.cancel(gameObject);
         LeanTween.scale(_spawnedCircle.gameObject, new Vector2(1f, 1f) * _circle.GetRadius() * 2, 0.1f);
     }
 
     private void OnMouseExit()
     {
-        //_spawnedCircle.localScale = new Vector2(0f, 0f);
-        //LeanTween.cancel(gameObject);
+        LeanTween.cancel(gameObject);
         LeanTween.scale(_spawnedCircle.gameObject,  Vector2.zero, 0.1f);
     }
 }
