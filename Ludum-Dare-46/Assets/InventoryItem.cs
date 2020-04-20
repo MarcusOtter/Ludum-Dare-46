@@ -11,7 +11,7 @@ public class InventoryItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 {
     [SerializeField] private Color outlineHoverColor;
 
-    internal bool selected;
+    internal bool _selected;
 
     public UnityEvent OnHover;
     public UnityEvent OnStopHover;
@@ -30,7 +30,7 @@ public class InventoryItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
     internal Seed selsctedSeed;
 
-    private void Start()
+    private void Awake()
     {
 
         button = GetComponent<Button>();
@@ -43,12 +43,30 @@ public class InventoryItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
         LeanTween.scaleY(gameObject, 1f, easeTime);
 
-        outline.effectColor = Color.black;
+        //outline.effectColor = Color.black;
+    }
+
+    public void SetSelected(bool selected)
+    {
+        _selected = selected;
+        outline.effectColor = selected ? outlineHoverColor : Color.black;
+
+        LeanTween.cancel(gameObject);
+
+        if(selected)
+        {
+            Vector2 selectionScale = new Vector2(1.1f, 1.1f);
+            transform.localScale = selectionScale;
+            LeanTween.scale(gameObject, new Vector2(1, 1), easeTime).setEase(LeanTweenType.easeOutSine);
+        }
     }
 
     public void SetCounter(int counter)
     {
         transform.GetChild(2).GetComponentInChildren<TextMeshProUGUI>().SetText(counter.ToString());
+        LeanTween.cancel(gameObject);
+        transform.localScale = new Vector2(1, 1) * 1.1f;
+        LeanTween.scale(gameObject, new Vector2(1,1), easeTime).setEase(LeanTweenType.easeOutSine);
     }
 
     public void SetUISprite(Sprite sprite)
@@ -64,7 +82,7 @@ public class InventoryItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     private void ScaleButton(bool scaleUp)
     {
         Vector2 newScale = scaleUp ? new Vector2(maxScale, maxScale) : new Vector2(1f,1f);
-        LeanTween.scale(gameObject, newScale, easeTime);
+        LeanTween.scale(gameObject, newScale, easeTime).setEase(LeanTweenType.easeOutSine); ;
     }
 
     public void OnPointerEnter(PointerEventData eventData)
@@ -74,7 +92,7 @@ public class InventoryItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
         OnHover.Invoke();
         ScaleButton(true);
-        LeanTween.value(gameObject, outline.effectColor, outlineHoverColor, easeTime).setOnUpdate(SetOutlineColor);
+        LeanTween.value(gameObject, outline.effectColor, outlineHoverColor, easeTime).setOnUpdate(SetOutlineColor).setEase(LeanTweenType.easeOutSine); ;
     }
 
     public void OnPointerExit(PointerEventData eventData)
@@ -83,7 +101,7 @@ public class InventoryItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
         OnStopHover.Invoke();
         ScaleButton(false);
-        LeanTween.value(gameObject, outline.effectColor, Color.black, easeTime).setOnUpdate(SetOutlineColor);
+        if (!_selected) LeanTween.value(gameObject, outline.effectColor, Color.black, easeTime).setOnUpdate(SetOutlineColor).setEase(LeanTweenType.easeOutSine); ;
     }
 
     private void SetOutlineColor(Color c)
