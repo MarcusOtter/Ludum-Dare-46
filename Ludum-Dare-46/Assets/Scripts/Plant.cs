@@ -7,6 +7,7 @@ public abstract class Plant : MonoBehaviour, IWaterable, IDamageable
     [SerializeField] internal PlantType PlantType;
     [SerializeField] internal string Name;
     [SerializeField] internal string Description;
+    [SerializeField] protected float ActiveRadius;
 
     [Header("Health")]
     [SerializeField] private float _fullyGrownMaxHealth = 20f;

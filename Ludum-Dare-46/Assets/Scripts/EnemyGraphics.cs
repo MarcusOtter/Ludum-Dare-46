@@ -49,10 +49,12 @@ public class EnemyGraphics : MonoBehaviour
         {
             case EnemyState.Attacking:
                 _animator.SetBool(_attackParameterHash, true);
+                _animator.SetBool(_stunnedParameterHash, false);
                 break;
 
             case EnemyState.Stunned:
                 _animator.SetBool(_stunnedParameterHash, true);
+                _animator.SetBool(_attackParameterHash, false);
                 break;
                 
             default:
