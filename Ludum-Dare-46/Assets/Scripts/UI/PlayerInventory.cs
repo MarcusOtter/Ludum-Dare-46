@@ -16,7 +16,7 @@ public class PlayerInventory : MonoBehaviour
     private List<InventorySlot> _inventorySlots = new List<InventorySlot>();
     private InventorySlot _currentSelectedSlot;
 
-    private uint _slotIndex;
+    private int _slotIndex;
 
     private const float _scrollInterval = 0.05f;
     private float _lastScrollTime;
@@ -29,12 +29,12 @@ public class PlayerInventory : MonoBehaviour
 
     public void Equip(int i)
     {
-        _slotIndex = (uint) i;
+        _slotIndex = i;
 
-        _currentSelectedSlot?._item.SetSelected(false);
+        _currentSelectedSlot?.Item.SetSelected(false);
  
         _currentSelectedSlot = _inventorySlots[i];
-        _currentSelectedSlot._item.SetSelected(true);
+        _currentSelectedSlot.Item.SetSelected(true);
         return;
     }
 
@@ -52,7 +52,7 @@ public class PlayerInventory : MonoBehaviour
     {
         for (int i = 0; i < _inventorySlots.Count; i++)
         {
-            if (item == _inventorySlots[i]._item)
+            if (item == _inventorySlots[i].Item)
             {
                 Equip(i);
             }
@@ -61,14 +61,14 @@ public class PlayerInventory : MonoBehaviour
 
     public void Equip(InventoryItem item)
     {
-        _currentSelectedSlot?._item.SetSelected(false);
+        _currentSelectedSlot?.Item.SetSelected(false);
 
         for(int i = 0; i < _inventorySlots.Count; i++)
         {
-            if(item == _inventorySlots[i]._item)
+            if(item == _inventorySlots[i].Item)
             {
                 _currentSelectedSlot = _inventorySlots[i];
-                _currentSelectedSlot._item.SetSelected(true);
+                _currentSelectedSlot.Item.SetSelected(true);
                 return;            
             }
         }
@@ -86,7 +86,7 @@ public class PlayerInventory : MonoBehaviour
         int slotIndex = ReturnSlotContainingSeed(seed);
         if (slotIndex > -1)
         {
-            _inventorySlots[slotIndex]._amount += amount;
+            _inventorySlots[slotIndex].Amount += amount;
             UpdateSeedNumber(slotIndex);
         }
         else
@@ -126,9 +126,9 @@ public class PlayerInventory : MonoBehaviour
 
     private int ReturnSlotContainingSeed(Seed seed)
     {
-        for(int i = 0; i < _inventorySlots.Count; i++)
+        for (int i = 0; i < _inventorySlots.Count; i++)
         {
-            if(seed.PlantToGrowPrefab.PlantType == _inventorySlots[i]._seed.PlantToGrowPrefab.PlantType)
+            if (seed.PlantToGrowPrefab.PlantType == _inventorySlots[i].Seed.PlantToGrowPrefab.PlantType)
             {
                 return i;
             }
@@ -140,17 +140,19 @@ public class PlayerInventory : MonoBehaviour
     {
         var item = Instantiate(_inventoryBoxPrefab, _sidebar);
         item.index = _inventorySlots.Count;
-        
-        InventorySlot slot = new InventorySlot();
-        slot._seed = seed;
-        slot._item = item;
-        slot._amount = amount;
 
+        InventorySlot slot = new InventorySlot
+        {
+            Seed = seed,
+            Item = item,
+            Amount = amount
+        };
 
-        //you saw nothing
-        slot._item.transform.GetChild(0).GetComponent<InventoryTextBox>().SetName(seed.PlantToGrowPrefab.name);
-        slot._item.transform.GetChild(0).GetComponent<InventoryTextBox>().SetDescription(seed.PlantToGrowPrefab.Description);
-        slot._item.SetUISprite(seed.PlantToGrowPrefab.GetFullyGrownSprite());
+        var textBox = slot.Item.transform.GetComponentInChildren<InventoryTextBox>();
+        textBox.SetName(seed.PlantToGrowPrefab.name);
+        textBox.SetDescription(seed.PlantToGrowPrefab.Description);
+
+        slot.Item.SetUISprite(seed.PlantToGrowPrefab.GetFullyGrownSprite());
 
         _inventorySlots.Add(slot);
 
@@ -159,14 +161,14 @@ public class PlayerInventory : MonoBehaviour
 
     private void UpdateSeedNumber(int index)
     {
-        _inventorySlots[index]._item.SetCounter(_inventorySlots[index]._amount);
+        _inventorySlots[index].Item.SetCounter(_inventorySlots[index].Amount);
     }
 
     [System.Serializable]
     public class InventorySlot
     {
-        public InventoryItem _item;
-        public Seed _seed;
-        public int _amount;
+        public InventoryItem Item;
+        public Seed Seed;
+        public int Amount;
     }
 }

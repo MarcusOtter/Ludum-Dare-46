@@ -126,24 +126,24 @@ Game remake:
         ✔ Cactus - Shoots in a circle around it short range
         ✔ Health plant - Increases max health
         ✔ Efficiency plant - Efficiency bonus for plants in the area
-    ☐ Get water from clouds (they rain)
+    ✔ Get water from clouds (they rain)
     ✔ If the cloud is over the plant it's meter fills up automatically
     ✔ Make the water shooting gun
-    ☐ Maybe show area of effect on plants when you plant and show it when you hover over it with mouse
-    ☐ Seed drop when plant finished growing & enemies dies with probability
+    ✔ Maybe show area of effect on plants when you plant and show it when you hover over it with mouse
+    ✔ Seed drop when plant finished growing & enemies dies with probability
     ✔ Enemies that target the middle plant primarily but smaller plants if in close perimiter
     ✔ Make the middle sacred plant waterable
     ✔ Enemies are stunned when you shoot water on them for x amount time
     ✔ Make the cloud edges blurry
     ✔ Add rain to clouds (blue particles under it)
-    ☐ When you walk under a cloud, start slowly scaling it down and fill up water
+    ✔ When you walk under a cloud, start slowly scaling it down and fill up water
     ✔ Water meter on the right side
     ☐ Music
     ✔ Overheal bug with plants
     ☐ Pause menu
     ✔ Enemy spawner
     ☐ Difficulty scaler
-    ☐ Cloud spawner
+    ✔ Cloud spawner
     ☐ Enemy death animation somehow
 
     Scripts:
@@ -155,7 +155,7 @@ Game remake:
         ✔ Rip out most of the logic in the PlayerAttributes
         ✔ Player weapon remake to water gun
         ✔ Remake clouds to rain on IWaterables
-        ☐ Make clouds be suckable
+        ✔ Make clouds be suckable
         ✔ Remake enemies
         ✔ Push enemies with water
 
@@ -178,7 +178,8 @@ Game remake:
         ✔ Rotate bullet
         ✔ Dont shoot dead enemies
 
-        Fix circle script
+        ☐ Enemy death animation
+        ☐ Fix clouds to not be suckable when small, also hide them.
 
     To discuss:
         ✔ Do you press a button to suck up the clouds or does it just happen

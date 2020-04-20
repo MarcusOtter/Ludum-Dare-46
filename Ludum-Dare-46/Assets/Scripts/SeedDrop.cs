@@ -1,10 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class SeedDrop : MonoBehaviour
 {
     [SerializeField] private Seed[] _seedDrops;
+
     private enum Dropper
     {
         Enemy,
@@ -13,10 +12,9 @@ public class SeedDrop : MonoBehaviour
     }
 
     private Dropper dropper = Dropper.None;
-
-
     private Enemy enemyComponent;
     private Plant plantComponent;
+
     private void Awake()
     {
         enemyComponent = GetComponent<Enemy>();
@@ -28,13 +26,15 @@ public class SeedDrop : MonoBehaviour
         {
             plantComponent = GetComponent<Plant>();
             if (plantComponent != null)
+            {
                 dropper = Dropper.Plant;
+            }
         }
     }
 
     private void OnEnable()
     {
-        switch(dropper)
+        switch (dropper)
         {
             case Dropper.Plant:
                 plantComponent.OnGrowthStageChanged += DropOnPlantGrowUp;
@@ -46,7 +46,6 @@ public class SeedDrop : MonoBehaviour
                 Debug.LogError($"You've attached a seed dropper to something which can't drop a seed: \n{name}");
                 break;
         }
-
     }
 
     private void OnDisable()
@@ -73,7 +72,7 @@ public class SeedDrop : MonoBehaviour
 
     public void DropOnPlantGrowUp(GrowthStage floob, GrowthStage newState)
     {
-        if(newState == GrowthStage.FullyGrown)
+        if (newState == GrowthStage.FullyGrown)
         {
             TryDropSeed();
         }
@@ -81,11 +80,10 @@ public class SeedDrop : MonoBehaviour
 
     public void TryDropSeed()
     {
-        print("drop");
-        for(int i = 0; i < _seedDrops.Length; i++)
+        for (int i = 0; i < _seedDrops.Length; i++)
         {
             int r = Random.Range(0, 100);
-            if(r <= _seedDrops[i].Probability)
+            if (r <= _seedDrops[i].Probability)
             {
                 Instantiate(_seedDrops[i], transform.position + new Vector3(Random.Range(-1, 1), Random.Range(-1, 1), 0f), Quaternion.Euler(0,0,Random.Range(0f, 360f)));
             }
