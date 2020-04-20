@@ -9,7 +9,7 @@ public abstract class Plant : MonoBehaviour, IWaterable, IDamageable
     [SerializeField] internal string Description;
 
     [Header("Health")]
-    [SerializeField] protected float FullyGrownMaxHealth = 20f;
+    [SerializeField] private float _fullyGrownMaxHealth = 20f;
     [SerializeField] private float _seedlingMaxHealth = 5f;
     [SerializeField] private float _seedlingStartHealth = 1f;
 
@@ -22,16 +22,22 @@ public abstract class Plant : MonoBehaviour, IWaterable, IDamageable
     [SerializeField] private SpriteRenderer _spriteRenderer;
     [SerializeField] private HealthBar _healthBar; 
 
+    internal bool IsDead { get; private set; }
     protected float Efficiency { get; private set; }
 
     private GrowthStage _growthStage;
     private float _health;
-    private bool _isDead;
 
     private void Awake()
     {
-        _growthStage = GrowthStage.Seedling;
-        _health = _seedlingStartHealth;
+        _growthStage = PlantType == PlantType.Sacred 
+            ? GrowthStage.FullyGrown 
+            : GrowthStage.Seedling;
+
+        _health = PlantType == PlantType.Sacred 
+            ? _fullyGrownMaxHealth 
+            : _seedlingStartHealth;
+
         _healthBar.SetHealth(_health, GetCurrentMaxHealth());
     }
 
@@ -40,7 +46,7 @@ public abstract class Plant : MonoBehaviour, IWaterable, IDamageable
         ModifyHealth(waterAmount);
     }
 
-    public void TakeDamage(float incomingDamage)
+    public void Damage(float incomingDamage)
     {
         ModifyHealth(-incomingDamage);
     }
@@ -54,20 +60,19 @@ public abstract class Plant : MonoBehaviour, IWaterable, IDamageable
     {
         return _growthStage == GrowthStage.Seedling
             ? _seedlingMaxHealth
-            : FullyGrownMaxHealth;
+            : _fullyGrownMaxHealth;
     }
 
     private void ModifyHealth(float amount)
     {
-        if (_isDead) { return; }
+        if (IsDead) { return; }
 
         _health += amount;
         _healthBar.SetHealth(_health, GetCurrentMaxHealth());
 
-        if (_health == 0)
+        if (_health <= 0)
         {
-            _isDead = true;
-            SetNewGrowthStage(GrowthStage.Dead); 
+            Die();
             return;
         }
 
@@ -77,14 +82,25 @@ public abstract class Plant : MonoBehaviour, IWaterable, IDamageable
         }
     }
 
+    private void Die()
+    {
+        IsDead = true;
+        SetNewGrowthStage(GrowthStage.Dead);
+
+        if (PlantType == PlantType.Sacred)
+        {
+            print("Game over");
+        }
+    }
+
     private void SetNewGrowthStage(GrowthStage growthStage)
     {
         // Remove this if we wanna be able to cure the dead plants
-        if (_isDead) { return; }
+        if (IsDead) { return; }
 
         _growthStage = growthStage;
         _spriteRenderer.sprite = GetSpriteForGrowthStage(growthStage);
-        // Could do particle effects here and sounds
+        // Could do particle effects here and sounds, maybe animation for sacred idk
     }
 
     private Sprite GetSpriteForGrowthStage(GrowthStage growthStage) 

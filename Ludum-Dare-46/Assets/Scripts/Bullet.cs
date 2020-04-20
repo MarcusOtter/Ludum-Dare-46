@@ -60,7 +60,7 @@ public class Bullet : MonoBehaviour
 
         if (hitDamageable != null)
         {
-            hitDamageable.TakeDamage(_damage);
+            hitDamageable.Damage(_damage);
         }
         else
         {
@@ -79,7 +79,7 @@ public class Bullet : MonoBehaviour
 
         if (hitDamageable != null)
         {
-            hitDamageable.TakeDamage(_damage);
+            hitDamageable.Damage(_damage);
         }
         else
         {

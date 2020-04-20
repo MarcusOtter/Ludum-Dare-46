@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Cyclops
+  m_Controller: {fileID: 9100000, guid: ff627c1382694b94a8ebd8a0882a5f3e, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: 898ed0acf8b80ad4f92b4c80b34651ce, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 0d176497ce990d24c8b9e4f3e4eb6cca, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: e6cd0d956e9a89241b8443f43ba374df, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: c9da1cc3535e574438581d8f48b88db7, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: da6ef9f7c4d704b4a8818c8e68a2017c, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 09c8c1a6e1c5c0e40bd667c0e862e98a, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: a632184ce9cfcd94fbbe09ab25bb51af, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: fc76f416d8adf354f93604c44dcb21aa, type: 2}

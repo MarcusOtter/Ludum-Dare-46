@@ -1,83 +1,187 @@
-﻿using System;
+﻿using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
+using System;
 
-[RequireComponent(typeof(Rigidbody2D))]
-public abstract class Enemy : MonoBehaviour, IDamageable
+[RequireComponent(typeof(Rigidbody2D), typeof(Collider2D))]
+public class Enemy : MonoBehaviour, IDamageable
 {
+    internal Action<EnemyState, EnemyState> OnStateChanged;
+
     [Header("General Enemy Settings")]
-    [SerializeField] protected float MaxHealth;
-    [SerializeField] protected float MovementSpeed;
+    [SerializeField] private float _maxHealth = 5f;
+    [SerializeField] private float _movementSpeed = 3f;
+    [SerializeField] private float _damage = 5f;
+    [SerializeField] private float _attackDelay = 3f;
+    [SerializeField] private float _attackRadius = 2f;
+    [SerializeField] private float _waterStunDuration = 4f;
+
+    [Header("References")]
+    [SerializeField] private PlantDetector _plantDetector;
+    [SerializeField] private HealthBar _healthBar;
 
     [Header("Audio settings")]
     [SerializeField] private SoundEffect _damagedSound;
 
-    [Header("Enemy events")]
-    protected Action OnDeath;
-    protected Action OnDamageTaken;
+    internal Vector2 CurrentVelocity => _rigidbody.velocity;
 
-    protected bool IsDead;
-    protected float Health;
+    private Rigidbody2D _rigidbody;
+    private Transform _sacredPlant;
 
-    protected Rigidbody2D Rigidbody;
-    protected Transform PlayerTransform;
+    private Transform _target;
 
-    protected virtual void Awake()
+    private Vector2 _movementDirection;
+    private List<WaterArea> _waterAreasToFleeFrom = new List<WaterArea>();
+    private EnemyState _currentState;
+    private float _health;
+    private float _lastAttackTime = -100f;
+    private float _lastStunTime = -100f;
+
+    private void Awake()
     {
-        Rigidbody = GetComponent<Rigidbody2D>();
-        Health = MaxHealth;
+        _rigidbody = GetComponent<Rigidbody2D>();
+        _health = _maxHealth;
+        _healthBar.SetHealth(_health, _maxHealth);
     }
 
-    protected virtual void OnEnable()
+    private void Start()
     {
-        PlayerAttributes.OnDeath += OnPlayerDeathBehaviour;
+        var sacredPlant = GameObject.FindGameObjectWithTag(EnvironmentVariables.SacredPlantTag);
+        if (sacredPlant != null) { _sacredPlant = sacredPlant.transform; }
     }
 
-    protected virtual void Start()
+    private void FixedUpdate()
     {
-        var playerMovement = FindObjectOfType<PlayerMovement>();
-        if (playerMovement != null)
+        if (_currentState == EnemyState.Dead) 
         {
-            PlayerTransform = playerMovement.transform.root;
+            _rigidbody.velocity = Vector2.zero;
+            return; 
+        }
+
+        if (_waterAreasToFleeFrom.Count != 0)
+        {
+            Flee();
+            return;
+        }
+
+        if (Time.time < _lastStunTime + _waterStunDuration)
+        {
+            SetState(EnemyState.Stunned);
+            _rigidbody.velocity = Vector2.zero;
+            return;
+        }
+
+        _target = GetClosestTarget();
+        if (_target == null) { return; }
+
+        var distanceToTarget = (_target.position - transform.position).magnitude;
+        if (distanceToTarget <= _attackRadius)
+        {
+            SetState(EnemyState.Attacking);
+            _rigidbody.velocity = Vector2.zero;
+
+            var canAttack = Time.time >= _lastAttackTime + _attackDelay;
+            if (!canAttack) { return; }
+
+            Attack();
+            _lastAttackTime = Time.time;
+        }
+        else
+        {
+            SetState(EnemyState.Hunting);
+            _movementDirection = (_target.position - transform.position).normalized;
+            Move();
         }
     }
 
-
-    protected virtual void FixedUpdate()
+    private void Flee()
     {
-        if (IsDead) { return; }
-
+        SetState(EnemyState.Fleeing);
+        _movementDirection = -(_waterAreasToFleeFrom[0].transform.position - transform.position).normalized;
         Move();
     }
 
-    protected abstract void Move();
-
-    public void TakeDamage(float incomingDamage)
+    private void SetState(EnemyState state)
     {
-        Health -= incomingDamage;
-        OnDamageTaken?.Invoke();
-        PlayDamagedSound();
+        if (_currentState == EnemyState.Dead) { return; }
 
-        if (Health <= 0) { Die(); }
+        if (_currentState != state)
+        {
+            OnStateChanged?.Invoke(_currentState, state);
+        }
+
+        _currentState = state;
     }
 
-    private void PlayDamagedSound()
+    private void Attack()
     {
+        var colliders = Physics2D.CircleCastAll(transform.position, _attackRadius, Vector2.zero)
+            .Select(x => x.collider)
+            .Distinct()
+            .ToArray();
+
+
+        foreach(var collider in colliders)
+        {
+            if (!collider.TryGetComponent<Plant>(out var plant)) { continue; }
+            plant.Damage(_damage);
+        }
+    }
+
+    private Transform GetClosestTarget()
+    {
+        var plantsInRange = _plantDetector.GetPlantsInRange();
+
+        if (plantsInRange.Length == 0) { return _sacredPlant; }
+
+        return plantsInRange
+            .OrderBy(x => (transform.position - x.transform.position).sqrMagnitude)
+            .FirstOrDefault()
+            .transform;
+    }
+
+    private void Move()
+    {
+        if (_target == null) { return; }
+
+        _rigidbody.velocity = _movementDirection * _movementSpeed;
+    }
+
+    public void Damage(float incomingDamage)
+    {
+        if (_currentState == EnemyState.Dead) { return; }
+
+        _health -= incomingDamage;
+        _healthBar.SetHealth(_health, _maxHealth);
+
         AudioManager.Instance.PlaySoundEffect(_damagedSound);
+
+        if (_health <= 0) { Die(); }
     }
 
-    protected void Die()
+    private void Die()
     {
-        IsDead = true;
-        OnDeath?.Invoke();
+        SetState(EnemyState.Dead);
     }
 
-    private void OnPlayerDeathBehaviour()
+    private void OnTriggerEnter2D(Collider2D collider)
     {
-        enabled = false;
+        if (!collider.TryGetComponent<WaterArea>(out var waterArea)) { return; }
+
+        _waterAreasToFleeFrom.AddIfNotContains(waterArea);
+        _movementDirection = -(waterArea.transform.position - transform.position).normalized;
     }
 
-    protected virtual void OnDisable()
+    private void OnTriggerExit2D(Collider2D collider)
     {
-        PlayerAttributes.OnDeath -= OnPlayerDeathBehaviour;
+        if (!collider.TryGetComponent<WaterArea>(out var waterArea)) { return; }
+
+        _waterAreasToFleeFrom.RemoveIfContains(waterArea);
+
+        if (_waterAreasToFleeFrom.Count == 0) 
+        { 
+            _lastStunTime = Time.time;
+            SetState(EnemyState.Stunned);
+        }
     }
 }

@@ -116,8 +116,8 @@ Game remake:
     You protect it by planting different plant species that you have to water and grow
     Basically plants vs zombies except you can move around
 
-    ☐ Inventory system for seeds
-    ☐ Pick up seeds & add to inventory
+    ✔ Inventory system for seeds
+    ✔ Pick up seeds & add to inventory
     ☐ Plant the seed
     ☐ Plant grow and plant behaviour
         ☐ Gun plant - shoots enemies nearby but needs ammo
@@ -127,13 +127,13 @@ Game remake:
         ☐ Green plant - Efficiency bonus for plants in the area
     ☐ Get water from clouds (they rain)
     ✔ If the cloud is over the plant it's meter fills up automatically
-    ☐ Make the water shooting gun
+    ✔ Make the water shooting gun
     ☐ Maybe show area of effect on plants when you plant and show it when you hover over it with mouse
     ☐ Seed drop when plant finished growing & enemies dies with probability
-    ☐ Enemies that target the middle plant primarily but smaller plants if in close perimiter
-    ☐ Make the middle sacred plant waterable
-    ☐ Enemies are stunned when you shoot water on them for x amount time
-    ☐ Make the cloud edges blurry
+    ✔ Enemies that target the middle plant primarily but smaller plants if in close perimiter
+    ✔ Make the middle sacred plant waterable
+    ✔ Enemies are stunned when you shoot water on them for x amount time
+    ✔ Make the cloud edges blurry
     ☐ Add rain to clouds (blue particles under it)
     ☐ When you walk under a cloud, start slowly scaling it down and fill up water
     ☐ Water meter on the right side
@@ -145,12 +145,12 @@ Game remake:
         ☐ One implementation for every plant
         ☐ Seed
         ✔ PlantType
-        ☐ Rip out most of the logic in the PlayerAttributes
+        ✔ Rip out most of the logic in the PlayerAttributes
         ✔ Player weapon remake to water gun
         ✔ Remake clouds to rain on IWaterables
         ☐ Make clouds be suckable
-        ☐ Remake enemies
-        ☐ Push enemies with water
+        ✔ Remake enemies
+        ✔ Push enemies with water
 
     Graphics:
         ✔ Sacred plant
@@ -159,8 +159,14 @@ Game remake:
         ✔ Helmet vacuum cloud sucker thing
         ✔ Seeds for every flower type
         ✔ Projectiles for flowers
-        ☐ Water sploosh
-        ☐ Rain droplet
+        ✔ Water sploosh
+        ✔ Rain droplet
+
+
+        ☐ ICircleOnHover
+            Will be used for plants and enemy melee radius
+            ☐ Color
+            ☐ Radius
 
 
     To discuss:
