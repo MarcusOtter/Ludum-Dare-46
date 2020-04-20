@@ -169,6 +169,8 @@ GameObject:
   - component: {fileID: 4806920483182120739}
   - component: {fileID: 4806920483182120740}
   - component: {fileID: 2187207375923307902}
+  - component: {fileID: 2044660122}
+  - component: {fileID: 2275498996654058213}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -242,6 +244,32 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0}
   m_Size: {x: 1, y: 2.5}
   m_Direction: 0
+--- !u!114 &2044660122
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4806920483182120742}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 277cc569e8ecdeb4d95ac03670898e18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2275498996654058213
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4806920483182120742}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd71bfd8266e0554198802fba987c1f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playerInventory: {fileID: 0}
+  _plantKey: 32
 --- !u!1 &4806920483381293760
 GameObject:
   m_ObjectHideFlags: 0
@@ -369,7 +397,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   RecoilKnockbackForce: 10
-  _waterConsumptionPerSecond: 1
+  _waterConsumptionPerSecond: 2
   _numberOfPoints: 10
   _arcHeight: 0.3
   _minRange: 0
