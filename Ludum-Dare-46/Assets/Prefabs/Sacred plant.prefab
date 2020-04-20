@@ -101,7 +101,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.03}
-    oldSize: {x: 15.625, y: 15.625}
+    oldSize: {x: 20.833334, y: 20.833334}
     newSize: {x: 5, y: 5}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -125,10 +125,11 @@ MonoBehaviour:
   PlantType: 5
   Name: The sacred plant
   Description: Protect it with your life.
+  ActiveRadius: 0
   _fullyGrownMaxHealth: 200
   _seedlingMaxHealth: 0
   _seedlingStartHealth: 0
-  _deadSprite: {fileID: 0}
+  _deadSprite: {fileID: 21300000, guid: 8e09d76a5f01c0349b58b81fb5feb7a9, type: 3}
   _seedlingSprite: {fileID: 0}
   _fullyGrownSprite: {fileID: 21300000, guid: 8e09d76a5f01c0349b58b81fb5feb7a9, type: 3}
   _spriteRenderer: {fileID: 2156374595903328991}

@@ -96,6 +96,7 @@ public abstract class Plant : MonoBehaviour, IWaterable, IDamageable
     {
         IsDead = true;
         SetNewGrowthStage(GrowthStage.Dead);
+        _healthBar.SetVisibility(false);
 
         if (PlantType == PlantType.Sacred)
         {
@@ -105,9 +106,6 @@ public abstract class Plant : MonoBehaviour, IWaterable, IDamageable
 
     private void SetNewGrowthStage(GrowthStage growthStage)
     {
-        // Remove this if we wanna be able to cure the dead plants
-        if (IsDead) { return; }
-
         GrowthStage = growthStage;
         _spriteRenderer.sprite = GetSpriteForGrowthStage(growthStage);
         // Could do particle effects here and sounds, maybe animation for sacred idk

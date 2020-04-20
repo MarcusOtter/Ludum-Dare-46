@@ -160,7 +160,7 @@ MonoBehaviour:
   _fullyGrownMaxHealth: 15
   _seedlingMaxHealth: 10
   _seedlingStartHealth: 3
-  _deadSprite: {fileID: 0}
+  _deadSprite: {fileID: 21300000, guid: d709acc04c4e03340a6da25eb2ced2a8, type: 3}
   _seedlingSprite: {fileID: 21300000, guid: c82b29494abca3e4f9f9e32dc81b3537, type: 3}
   _fullyGrownSprite: {fileID: 21300000, guid: b10e8326469482d478e73a2c6587eb04, type: 3}
   _spriteRenderer: {fileID: 9041311270504737967}
