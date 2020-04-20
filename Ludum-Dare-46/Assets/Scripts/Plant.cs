@@ -133,6 +133,10 @@ public abstract class Plant : MonoBehaviour, IWaterable, IDamageable, ICircleOnH
             SetNewGrowthStage(GrowthStage.FullyGrown);
         }
     }
+    internal Sprite GetFullyGrownSprite()
+    {
+        return _fullyGrownSprite;
+    }
 
     protected virtual void Die()
     {

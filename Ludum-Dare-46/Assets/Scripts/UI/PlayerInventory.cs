@@ -150,7 +150,7 @@ public class PlayerInventory : MonoBehaviour
         //you saw nothing
         slot._item.transform.GetChild(0).GetComponent<InventoryTextBox>().SetName(seed.PlantToGrowPrefab.name);
         slot._item.transform.GetChild(0).GetComponent<InventoryTextBox>().SetDescription(seed.PlantToGrowPrefab.Description);
-        slot._item.SetUISprite(seed.PlantToGrowPrefab.GetComponent<SpriteRenderer>().sprite);
+        slot._item.SetUISprite(seed.PlantToGrowPrefab.GetFullyGrownSprite());
 
         _inventorySlots.Add(slot);
 

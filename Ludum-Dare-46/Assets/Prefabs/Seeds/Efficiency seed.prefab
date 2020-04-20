@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &9167864756553851210
+--- !u!1 &6092118421690253686
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,38 +8,38 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 9167864756553851222}
-  - component: {fileID: 9167864756553851223}
-  - component: {fileID: 9167864756553851220}
-  - component: {fileID: 9167864756553851221}
+  - component: {fileID: 6092118421690253578}
+  - component: {fileID: 6092118421690253579}
+  - component: {fileID: 6092118421690253684}
+  - component: {fileID: 6092118421690253685}
   m_Layer: 0
-  m_Name: TestPlant 2
+  m_Name: Efficiency seed
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &9167864756553851222
+--- !u!4 &6092118421690253578
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9167864756553851210}
+  m_GameObject: {fileID: 6092118421690253686}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.3711693, y: 2.3213282, z: -0.32617188}
+  m_LocalPosition: {x: 10.67, y: 1.21, z: -0.32599127}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &9167864756553851223
+--- !u!212 &6092118421690253579
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9167864756553851210}
+  m_GameObject: {fileID: 6092118421690253686}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -72,53 +72,45 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: f2b49954704132942bcad7345ad75974, type: 3}
+  m_Sprite: {fileID: 21300000, guid: e3cdee3663e17f54982b31596b7fe538, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 2, y: 2}
+  m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!70 &9167864756553851220
-CapsuleCollider2D:
+--- !u!58 &6092118421690253684
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9167864756553851210}
+  m_GameObject: {fileID: 6092118421690253686}
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_Size: {x: 2, y: 2}
-  m_Direction: 0
---- !u!114 &9167864756553851221
+  serializedVersion: 2
+  m_Radius: 0.5
+--- !u!114 &6092118421690253685
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9167864756553851210}
+  m_GameObject: {fileID: 6092118421690253686}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a076b4c4fd7257d4ab5bcab707bc52d2, type: 3}
+  m_Script: {fileID: 11500000, guid: fba4621b4738a03499485d4b7e9d8db6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlantType: 5
-  Name: Third test!
-  Description: Can you believe it?
-  FullyGrownMaxHealth: 20
-  _seedlingMaxHealth: 5
-  _seedlingStartHealth: 1
-  _deadSprite: {fileID: 0}
-  _seedlingSprite: {fileID: 0}
-  _fullyGrownSprite: {fileID: 0}
-  _spriteRenderer: {fileID: 0}
-  _healthBar: {fileID: 0}
+  PlantToGrowPrefab: {fileID: 806015894511943688, guid: e1ab16c32acdff743a1a0b0801370053,
+    type: 3}
+  Probability: 0
