@@ -12,32 +12,8 @@ public class PlayerInventory : MonoBehaviour
     [SerializeField] private RectTransform _sidebar;
     [SerializeField] private Image _waterBarImage;
 
-
-    private int ReturnSlotContainingSeed(Seed seed)
-    {
-        for(int i = 0; i < _inventorySlots.Count; i++)
-        {
-            if(seed.PlantToGrowPrefab.PlantType == _inventorySlots[i]._seed.PlantToGrowPrefab.PlantType)
-            {
-                return i;
-            }
-        }
-        return -1;
-    }
-
-    private void Update()
-    {
-        for(int i = 0; i < 9; i++)
-        {
-            if (Input.GetKeyDown(KeyCode.Alpha1 + i))
-                TryEquip(i);
-        }
-
-        if(Input.GetAxisRaw("Mouse ScrollWheel") != 0)
-        {
-            if (Time.time < lastScroll + scrollinterval) return;
-
-            lastScroll = Time.time;
+    private List<InventorySlot> _inventorySlots = new List<InventorySlot>();
+    private InventorySlot _currentSelectedSlot;
 
     private uint _slotIndex;
 
