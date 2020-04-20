@@ -159,7 +159,6 @@ MonoBehaviour:
   Name: Efficiency plant
   Description: Improves stats for nearby plants by 10%.
   ActiveRadius: 3
-  HoverCircleColour: {r: 0, g: 1, b: 0, a: 0.39215687}
   _fullyGrownMaxHealth: 20
   _seedlingMaxHealth: 10
   _seedlingStartHealth: 2

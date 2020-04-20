@@ -38,7 +38,7 @@ public class Cloud : MonoBehaviour
         _currentWaterAmount = Mathf.Clamp(_currentWaterAmount, 0f, _maxWaterAmount);
 
         // Shrink cloud
-        transform.localScale = _startingScale * _currentWaterAmount / _maxWaterAmount;
+        transform.localScale = _startingScale * Mathf.Clamp(_currentWaterAmount / _maxWaterAmount, 0.01f, _startingScale.x);
     }
 
     internal void ResetCloud()
