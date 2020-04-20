@@ -24,6 +24,8 @@ public class CircleOnMouseOver : MonoBehaviour
 
     private void OnMouseEnter()
     {
+        if (Input.GetMouseButton(0)) { return; }
+
         LeanTween.cancel(gameObject);
         LeanTween.scale(_spawnedCircle.gameObject, new Vector2(1f, 1f) * _circle.GetRadius() * 2, 0.1f);
     }
