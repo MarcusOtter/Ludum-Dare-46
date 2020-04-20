@@ -735,10 +735,6 @@ PrefabInstance:
       propertyPath: m_SizeDelta.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1445167370, guid: 679fbd7d0f1784040b703d4c087c27df, type: 3}
-      propertyPath: totalWaterCapacity
-      value: 100
-      objectReference: {fileID: 0}
     - target: {fileID: 7156772518271569251, guid: 679fbd7d0f1784040b703d4c087c27df,
         type: 3}
       propertyPath: m_LocalPosition.x

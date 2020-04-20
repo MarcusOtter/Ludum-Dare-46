@@ -32,6 +32,8 @@ public class PlayerWeapon : MonoBehaviour
     private void OnEnable()
     {
         _userInput = PlayerInput.Instance;
+        _playerInventory = FindObjectOfType<PlayerInventory>();
+
         _weaponPivot = transform.parent;
         _waterRenderer = GetComponent<LineRenderer>();
 
@@ -53,6 +55,8 @@ public class PlayerWeapon : MonoBehaviour
 
         _waterRenderer.enabled = true;
         SprayWater();
+
+        _playerInventory.ModifyWaterAmount(-_waterConsumptionPerSecond * Time.deltaTime);
 
         // Deplete water with water consumption per second * Time.deltaTime
         // Inventory.ModifyWater(_waterConsumptionPerSecond * Time.deltaTime);

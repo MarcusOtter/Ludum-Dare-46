@@ -140,7 +140,7 @@ Game remake:
     ☐ Music
     ✔ Overheal bug with plants
     ☐ Pause menu
-    ☐ Enemy spawner
+    ✔ Enemy spawner
     ☐ Difficulty scaler
     ☐ Cloud spawner
 
@@ -167,17 +167,12 @@ Game remake:
         ✔ Water sploosh
         ✔ Rain droplet
 
-
         ☐ ICircleOnHover
             Will be used for plants and enemy melee radius
             ☐ Color
             ☐ Radius
 
-
     To discuss:
         ☐ Do you press a button to suck up the clouds or does it just happen
-        ☐ Clouds should probably come from different directions right
-
-    "If we have time"-ideas:
-        Zoom camera in/out with scroll wheel (unless we use it for switching seeds)
+        ✔ Clouds should probably come from different directions right
 
