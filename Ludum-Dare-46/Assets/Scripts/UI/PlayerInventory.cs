@@ -3,68 +3,34 @@ using UnityEngine;
 
 public class PlayerInventory : MonoBehaviour
 {
+    internal float CurrentWater { get; private set; }
 
-    private InventorySlot currentSelectedSlot;
-
-    private uint slotindex;
-
-    private float lastScroll = 0f;
-    private float scrollinterval = 0.05f;
-
-    [SerializeField] internal float totalWaterCapacity, currentWater, startWater;
-
-    private List<InventorySlot> _inventorySlots = new List<InventorySlot>();
+    [SerializeField] private float _maxWaterCapacity;
+    [SerializeField] private float _startingWaterAmount;
     [SerializeField] private InventoryItem _inventoryBoxPrefab;
     [SerializeField] private RectTransform _sidebar;
 
-    private int ReturnSlotContainingSeed(Seed seed)
+    private List<InventorySlot> _inventorySlots = new List<InventorySlot>();
+    private InventorySlot _currentSelectedSlot;
+
+    private uint _slotIndex;
+
+    private const float _scrollInterval = 0.05f;
+    private float _lastScrollTime;
+
+    private void Awake()
     {
-        for(int i = 0; i < _inventorySlots.Count; i++)
-        {
-            if(seed.PlantToGrowPrefab.PlantType == _inventorySlots[i]._seed.PlantToGrowPrefab.PlantType)
-            {
-                return i;
-            }
-        }
-        return -1;
-    }
-
-    private void Update()
-    {
-        for(int i = 0; i < 9; i++)
-        {
-            if (Input.GetKeyDown(KeyCode.Alpha1 + i))
-                TryEquip(i);
-        }
-
-        if(Input.GetAxisRaw("Mouse ScrollWheel") != 0)
-        {
-            if (Time.time < lastScroll + scrollinterval) return;
-
-            lastScroll = Time.time;
-
-            int sign = -(int)Mathf.Sign(Input.GetAxisRaw("Mouse ScrollWheel"));
-            print(sign);
-            if (_inventorySlots.Count == 0) return;
-
-            int index = (int)slotindex;
-
-            index += sign;
-            if (index < 0) index = _inventorySlots.Count - 1;
-            index %= _inventorySlots.Count;
-            TryEquip(index);
-        }
+        CurrentWater = _startingWaterAmount;
     }
 
     public void Equip(int i)
     {
-        slotindex = (uint)i;
+        _slotIndex = (uint) i;
 
-        currentSelectedSlot?._item.SetSelected(false);
+        _currentSelectedSlot?._item.SetSelected(false);
  
-        currentSelectedSlot = _inventorySlots[i];
-        currentSelectedSlot._item.SetSelected(true);
-        print($"Equip {_inventorySlots[i]._seed.PlantToGrowPrefab.PlantType}");
+        _currentSelectedSlot = _inventorySlots[i];
+        _currentSelectedSlot._item.SetSelected(true);
         return;
     }
 
@@ -77,6 +43,7 @@ public class PlayerInventory : MonoBehaviour
             Equip(i);
         }
     }
+
     public void TryEquip(InventoryItem item)
     {
         for (int i = 0; i < _inventorySlots.Count; i++)
@@ -90,19 +57,25 @@ public class PlayerInventory : MonoBehaviour
 
     public void Equip(InventoryItem item)
     {
-        currentSelectedSlot?._item.SetSelected(false);
+        _currentSelectedSlot?._item.SetSelected(false);
 
         for(int i = 0; i < _inventorySlots.Count; i++)
         {
             if(item == _inventorySlots[i]._item)
             {
-                currentSelectedSlot = _inventorySlots[i];
-                currentSelectedSlot._item.SetSelected(true);
-                print($"Equip {_inventorySlots[i]._seed.PlantToGrowPrefab.PlantType}");
+                _currentSelectedSlot = _inventorySlots[i];
+                _currentSelectedSlot._item.SetSelected(true);
                 return;            
             }
         }
-        //print("Slot is not in the inventory, fix it");
+    }
+
+    internal void ModifyWaterAmount(float waterDelta)
+    {
+        CurrentWater += waterDelta;
+        CurrentWater = Mathf.Clamp(CurrentWater, 0f, _maxWaterCapacity);
+
+
     }
 
     internal void PickUp(Seed seed, int amount = 1)
@@ -118,6 +91,46 @@ public class PlayerInventory : MonoBehaviour
             AddPanel(seed, amount);
             UpdateSeedNumber(_inventorySlots.Count - 1);
         }
+    }
+
+    private void Update()
+    {
+        for(int i = 0; i < 9; i++)
+        {
+            if (Input.GetKeyDown(KeyCode.Alpha1 + i))
+            {
+                TryEquip(i);
+            }
+        }
+
+        if(Input.GetAxisRaw("Mouse ScrollWheel") != 0)
+        {
+            if (Time.time < _lastScrollTime + _scrollInterval) { return; }
+
+            _lastScrollTime = Time.time;
+
+            int sign = -(int) Mathf.Sign(Input.GetAxisRaw("Mouse ScrollWheel"));
+            if (_inventorySlots.Count == 0) { return; }
+
+            int index = (int) _slotIndex;
+
+            index += sign;
+            if (index < 0) index = _inventorySlots.Count - 1;
+            index %= _inventorySlots.Count;
+            TryEquip(index);
+        }
+    }
+
+    private int ReturnSlotContainingSeed(Seed seed)
+    {
+        for(int i = 0; i < _inventorySlots.Count; i++)
+        {
+            if(seed.PlantToGrowPrefab.PlantType == _inventorySlots[i]._seed.PlantToGrowPrefab.PlantType)
+            {
+                return i;
+            }
+        }
+        return -1;
     }
 
     private void AddPanel(Seed seed, int amount)
@@ -138,8 +151,7 @@ public class PlayerInventory : MonoBehaviour
 
         _inventorySlots.Add(slot);
 
-        if (_inventorySlots.Count == 1) Equip(0);
-
+        if (_inventorySlots.Count == 1) { Equip(0); }
     }
 
     private void UpdateSeedNumber(int index)
@@ -154,5 +166,4 @@ public class PlayerInventory : MonoBehaviour
         public Seed _seed;
         public int _amount;
     }
-
 }

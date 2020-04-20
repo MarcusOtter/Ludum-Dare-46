@@ -19,6 +19,7 @@ public class PlayerWeapon : MonoBehaviour
 
     internal Vector2 AimDirection { get; private set; }
 
+    private PlayerInventory _playerInventory;
     private PlayerInput _userInput;
     private LineRenderer _waterRenderer;
     private Transform _weaponPivot;
@@ -48,7 +49,7 @@ public class PlayerWeapon : MonoBehaviour
             return; 
         }
 
-        // If you don't have enough water, return
+        if (_playerInventory.CurrentWater <= 0) { return; }
 
         _waterRenderer.enabled = true;
         SprayWater();
