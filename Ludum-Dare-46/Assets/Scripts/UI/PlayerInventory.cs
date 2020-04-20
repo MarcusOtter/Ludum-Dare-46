@@ -14,6 +14,8 @@ public class PlayerInventory : MonoBehaviour
     [SerializeField] private RectTransform _sidebar;
     [SerializeField] private Image _waterBarImage;
 
+    [SerializeField] private RectTransform _menuButtonHolder;
+
     private List<InventorySlot> _inventorySlots = new List<InventorySlot>();
 
     private int _slotIndex;
@@ -138,7 +140,14 @@ public class PlayerInventory : MonoBehaviour
 
     private void AddPanel(Seed seed, int amount)
     {
-        var item = Instantiate(_inventoryBoxPrefab, _sidebar);
+        //var item = Instantiate(_inventoryBoxPrefab, _sidebar);
+
+        var item = _sidebar.GetChild(_inventorySlots.Count).GetComponent<InventoryItem>();//_menuButtonHolder.GetChild(0).GetComponent<InventoryItem>();
+
+        item.gameObject.SetActive(true);
+
+        //item.transform.parent = _sidebar;
+
         item.index = _inventorySlots.Count;
 
         InventorySlot slot = new InventorySlot
