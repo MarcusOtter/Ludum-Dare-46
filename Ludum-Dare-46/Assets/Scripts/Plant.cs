@@ -10,7 +10,6 @@ public abstract class Plant : MonoBehaviour, IWaterable, IDamageable, ICircleOnH
     [SerializeField] internal string Name;
     [SerializeField] internal string Description;
     [SerializeField] protected float ActiveRadius = 3f;
-    [SerializeField] private Color HoverCircleColour = new Color(0, 255, 0, 100);
 
     [Header("Health")]
     [SerializeField] private float _fullyGrownMaxHealth = 20f;
@@ -174,6 +173,6 @@ public abstract class Plant : MonoBehaviour, IWaterable, IDamageable, ICircleOnH
 
     public Color GetColour()
     {
-        return HoverCircleColour;
+        return new Color32(0, 255, 0, 75);
     }
 }

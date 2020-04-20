@@ -331,7 +331,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _enemy: {fileID: 299359473327015802}
-  _detectionRadius: 4
+  DetectionRadius: 3
 --- !u!114 &299359473884087817
 MonoBehaviour:
   m_ObjectHideFlags: 0

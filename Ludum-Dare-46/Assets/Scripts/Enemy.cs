@@ -190,11 +190,11 @@ public class Enemy : MonoBehaviour, IDamageable, ICircleOnHover
 
     public float GetRadius()
     {
-        return _attackRadius;
+        return _plantDetector.DetectionRadius;
     }
 
     public Color GetColour()
     {
-        return Color.red;
+        return new Color32(255, 0, 0, 75);
     }
 }
