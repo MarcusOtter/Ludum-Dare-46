@@ -5,8 +5,9 @@ using UnityEngine.UI;
 public class PlayerInventory : MonoBehaviour
 {
     internal float CurrentWater { get; private set; }
+    internal bool WaterIsFull => CurrentWater == _maxWaterAmount;
 
-    [SerializeField] private float _maxWaterCapacity;
+    [SerializeField] private float _maxWaterAmount;
     [SerializeField] private float _startingWaterAmount;
     [SerializeField] private InventoryItem _inventoryBoxPrefab;
     [SerializeField] private RectTransform _sidebar;
@@ -23,7 +24,7 @@ public class PlayerInventory : MonoBehaviour
     private void Awake()
     {
         CurrentWater = _startingWaterAmount;
-        _waterBarImage.fillAmount = CurrentWater / _maxWaterCapacity;
+        _waterBarImage.fillAmount = CurrentWater / _maxWaterAmount;
     }
 
     public void Equip(int i)
@@ -76,8 +77,8 @@ public class PlayerInventory : MonoBehaviour
     internal void ModifyWaterAmount(float waterDelta)
     {
         CurrentWater += waterDelta;
-        CurrentWater = Mathf.Clamp(CurrentWater, 0f, _maxWaterCapacity);
-        _waterBarImage.fillAmount = CurrentWater / _maxWaterCapacity;
+        CurrentWater = Mathf.Clamp(CurrentWater, 0f, _maxWaterAmount);
+        _waterBarImage.fillAmount = CurrentWater / _maxWaterAmount;
     }
 
     internal void PickUp(Seed seed, int amount = 1)

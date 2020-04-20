@@ -135,21 +135,22 @@ Game remake:
     ✔ Make the middle sacred plant waterable
     ✔ Enemies are stunned when you shoot water on them for x amount time
     ✔ Make the cloud edges blurry
-    ☐ Add rain to clouds (blue particles under it)
+    ✔ Add rain to clouds (blue particles under it)
     ☐ When you walk under a cloud, start slowly scaling it down and fill up water
-    ☐ Water meter on the right side
+    ✔ Water meter on the right side
     ☐ Music
     ✔ Overheal bug with plants
     ☐ Pause menu
     ✔ Enemy spawner
     ☐ Difficulty scaler
     ☐ Cloud spawner
+    ☐ Enemy death animation somehow
 
     Scripts:
         ✔ IWaterable
         ✔ Abstract plant remake
-        ☐ One implementation for every plant
-        ☐ Seed
+        ✔ One implementation for every plant
+        ✔ Seed
         ✔ PlantType
         ✔ Rip out most of the logic in the PlayerAttributes
         ✔ Player weapon remake to water gun
@@ -161,7 +162,7 @@ Game remake:
     Graphics:
         ✔ Sacred plant
         ✔ Water meter
-        ☐ Inventory grid things
+        ✘ Inventory boxes things
         ✔ Helmet vacuum cloud sucker thing
         ✔ Seeds for every flower type
         ✔ Projectiles for flowers
@@ -180,6 +181,6 @@ Game remake:
         Fix circle script
 
     To discuss:
-        ☐ Do you press a button to suck up the clouds or does it just happen
+        ✔ Do you press a button to suck up the clouds or does it just happen
         ✔ Clouds should probably come from different directions right
 

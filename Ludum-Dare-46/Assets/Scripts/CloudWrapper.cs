@@ -12,8 +12,11 @@ public class CloudWrapper : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collider)
     {
-        if (collider.GetComponentInParent<Cloud>() == null) { return; }
+        var cloud = collider.GetComponentInParent<Cloud>();
 
+        if (cloud == null) { return; }
+
+        cloud.ResetCloud();
         var cloudTransform = collider.transform.parent;
         
         if (cloudTransform.position.x > _bounds.max.x)
