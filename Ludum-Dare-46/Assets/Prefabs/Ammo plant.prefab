@@ -77,12 +77,11 @@ MonoBehaviour:
   Name: Ammo plant
   Description: Provides ammo to nearby gun plants.
   ActiveRadius: 4
-  HoverCircleColour: {r: 0, g: 1, b: 0, a: 0.39215687}
   _fullyGrownMaxHealth: 20
   _seedlingMaxHealth: 10
   _seedlingStartHealth: 2
   _deadSprite: {fileID: 21300000, guid: d709acc04c4e03340a6da25eb2ced2a8, type: 3}
-  _seedlingSprite: {fileID: 21300000, guid: c82b29494abca3e4f9f9e32dc81b3537, type: 3}
+  _seedlingSprite: {fileID: 21300000, guid: 8409c4cc2dd1f2348bb55c8a38e60dd1, type: 3}
   _fullyGrownSprite: {fileID: 21300000, guid: 3601601ea175d1c499cc09f4934b405e, type: 3}
   _spriteRenderer: {fileID: 2262938557508356767}
   _healthBar: {fileID: 2262938556216815460}
@@ -170,7 +169,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 10
-  m_Sprite: {fileID: 21300000, guid: c82b29494abca3e4f9f9e32dc81b3537, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 8409c4cc2dd1f2348bb55c8a38e60dd1, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
