@@ -54,6 +54,7 @@ public class PlayerWeapon : MonoBehaviour
         SprayWater();
 
         // Deplete water with water consumption per second * Time.deltaTime
+        // Inventory.ModifyWater(_waterConsumptionPerSecond * Time.deltaTime);
     }
 
     private void SprayWater()
@@ -115,6 +116,7 @@ public class PlayerWeapon : MonoBehaviour
     private void RegisterAttackKeyUp(PlayerInput sender)
     {
         _attackBeingHeld = false;
+        if (_spawnedSplash == null) { return; }
         Destroy(_spawnedSplash.gameObject);
     }
 

@@ -138,6 +138,11 @@ Game remake:
     ☐ When you walk under a cloud, start slowly scaling it down and fill up water
     ☐ Water meter on the right side
     ☐ Music
+    ✔ Overheal bug with plants
+    ☐ Pause menu
+    ☐ Enemy spawner
+    ☐ Difficulty scaler
+    ☐ Cloud spawner
 
     Scripts:
         ✔ IWaterable
@@ -175,4 +180,4 @@ Game remake:
 
     "If we have time"-ideas:
         Zoom camera in/out with scroll wheel (unless we use it for switching seeds)
-        
+
