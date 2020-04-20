@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7078300916245954749}
   - component: {fileID: 5584502526575385032}
   - component: {fileID: 2616402006475754681}
+  - component: {fileID: -2916857450270451525}
   m_Layer: 0
   m_Name: Heal plant
   m_TagString: Untagged
@@ -100,6 +101,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _circlePrefab: {fileID: 4693579199072887557, guid: eb9410af486d54542a532ecfabed874e,
     type: 3}
+--- !u!114 &-2916857450270451525
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7078300916245954751}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 463e0ebd3e8f5ce45b0f595a0abd473c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _seedDrops:
+  - {fileID: 4715158388414206905, guid: f8a75079678bd2a4fa50cd0cb9a5ebba, type: 3}
+  - {fileID: 4715158388414206905, guid: f8a75079678bd2a4fa50cd0cb9a5ebba, type: 3}
+  - {fileID: 4715158388414206905, guid: f8a75079678bd2a4fa50cd0cb9a5ebba, type: 3}
+  - {fileID: 4715158388414206905, guid: f8a75079678bd2a4fa50cd0cb9a5ebba, type: 3}
+  - {fileID: 4715158388414206905, guid: f8a75079678bd2a4fa50cd0cb9a5ebba, type: 3}
 --- !u!1 &7078300916745204867
 GameObject:
   m_ObjectHideFlags: 0

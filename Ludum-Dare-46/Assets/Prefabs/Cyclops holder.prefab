@@ -131,6 +131,7 @@ GameObject:
   - component: {fileID: 3606034568596804997}
   - component: {fileID: 3606034568596804996}
   - component: {fileID: 434560536871315302}
+  - component: {fileID: 6921572776253423609}
   m_Layer: 9
   m_Name: Cyclops
   m_TagString: Untagged
@@ -236,6 +237,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _circlePrefab: {fileID: 4693579199072887557, guid: eb9410af486d54542a532ecfabed874e,
     type: 3}
+--- !u!114 &6921572776253423609
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3606034568596804994}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 463e0ebd3e8f5ce45b0f595a0abd473c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _seedDrops:
+  - {fileID: 8953920904446798862, guid: 9f6a0d2eb2a165646947420ea406e532, type: 3}
+  - {fileID: 551375705722854758, guid: 045deef123dda544d8a1c6c6b84cea1c, type: 3}
+  - {fileID: 6092118421690253685, guid: 34ac785d3107f91449087196867dade4, type: 3}
+  - {fileID: 790485607672045006, guid: 7b1c312ba31b51b40820c4e4d9fdfcc7, type: 3}
+  - {fileID: 4715158388414206905, guid: f8a75079678bd2a4fa50cd0cb9a5ebba, type: 3}
 --- !u!1 &3606034568598296005
 GameObject:
   m_ObjectHideFlags: 0

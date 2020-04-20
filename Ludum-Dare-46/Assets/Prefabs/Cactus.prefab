@@ -93,6 +93,7 @@ GameObject:
   - component: {fileID: 9041311271003707539}
   - component: {fileID: 1598602376122438135}
   - component: {fileID: 4627640188357773148}
+  - component: {fileID: 6709834620187793665}
   m_Layer: 0
   m_Name: Cactus
   m_TagString: Untagged
@@ -190,6 +191,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _circlePrefab: {fileID: 4693579199072887557, guid: eb9410af486d54542a532ecfabed874e,
     type: 3}
+--- !u!114 &6709834620187793665
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9041311271003707537}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 463e0ebd3e8f5ce45b0f595a0abd473c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _seedDrops:
+  - {fileID: 551375705722854758, guid: 045deef123dda544d8a1c6c6b84cea1c, type: 3}
+  - {fileID: 551375705722854758, guid: 045deef123dda544d8a1c6c6b84cea1c, type: 3}
+  - {fileID: 551375705722854758, guid: 045deef123dda544d8a1c6c6b84cea1c, type: 3}
+  - {fileID: 551375705722854758, guid: 045deef123dda544d8a1c6c6b84cea1c, type: 3}
+  - {fileID: 551375705722854758, guid: 045deef123dda544d8a1c6c6b84cea1c, type: 3}
 --- !u!1001 &320887035152213580
 PrefabInstance:
   m_ObjectHideFlags: 0

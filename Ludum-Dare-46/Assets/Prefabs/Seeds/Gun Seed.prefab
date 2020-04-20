@@ -113,4 +113,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PlantToGrowPrefab: {fileID: 7445919800196833720, guid: dbc709403b601404d873ee16ea4683fb,
     type: 3}
-  Probability: 0
+  Probability: 25

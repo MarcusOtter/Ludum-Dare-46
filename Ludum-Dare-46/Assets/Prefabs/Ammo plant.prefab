@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2262938556908502691}
   - component: {fileID: 4660578826520315290}
   - component: {fileID: 3893501045317841673}
+  - component: {fileID: 49562306856685010}
   m_Layer: 0
   m_Name: Ammo plant
   m_TagString: Untagged
@@ -99,6 +100,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _circlePrefab: {fileID: 4693579199072887557, guid: eb9410af486d54542a532ecfabed874e,
     type: 3}
+--- !u!114 &49562306856685010
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2262938556908502689}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 463e0ebd3e8f5ce45b0f595a0abd473c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _seedDrops:
+  - {fileID: 8953920904446798862, guid: 9f6a0d2eb2a165646947420ea406e532, type: 3}
+  - {fileID: 8953920904446798862, guid: 9f6a0d2eb2a165646947420ea406e532, type: 3}
+  - {fileID: 8953920904446798862, guid: 9f6a0d2eb2a165646947420ea406e532, type: 3}
+  - {fileID: 8953920904446798862, guid: 9f6a0d2eb2a165646947420ea406e532, type: 3}
+  - {fileID: 8953920904446798862, guid: 9f6a0d2eb2a165646947420ea406e532, type: 3}
 --- !u!1 &2262938557508356765
 GameObject:
   m_ObjectHideFlags: 0
