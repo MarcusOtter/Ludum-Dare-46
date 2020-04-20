@@ -6,7 +6,7 @@ using UnityEngine;
 public class PlantDetector : MonoBehaviour
 {
     [SerializeField] private Enemy _enemy;
-    [SerializeField] private float _detectionRadius = 4f;
+    [SerializeField] internal float DetectionRadius = 4f;
 
     private List<Plant> _plantsInRange = new List<Plant>();
     private CircleCollider2D _collider;
@@ -23,9 +23,9 @@ public class PlantDetector : MonoBehaviour
 
     private void Update()
     {
-        if (_collider.radius != _detectionRadius)
+        if (_collider.radius != DetectionRadius)
         {
-            _collider.radius = _detectionRadius;
+            _collider.radius = DetectionRadius;
         }
     }
 
@@ -45,7 +45,7 @@ public class PlantDetector : MonoBehaviour
 
     internal Plant[] GetPlantsInRange()
     {
-        return _plantsInRange.Where(x => !x.IsDead).ToArray();
+        return _plantsInRange.Where(x => x.GrowthStage != GrowthStage.Dead).ToArray();
     }
 
     private void OnTriggerEnter2D(Collider2D collider)

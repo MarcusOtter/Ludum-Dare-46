@@ -5,8 +5,8 @@ using UnityEngine;
 public class Cactus : Plant
 {
     [Header("Cactus settings")]
-    [SerializeField] private float _attackDelay = 2f;
-    [SerializeField] private float _projectileDamage = 5f;
+    [SerializeField] private float _attackDelayBase = 2f;
+    [SerializeField] private float _projectileDamageBase = 5f;
     [SerializeField] private float _projectileSpeed = 2f;
     [SerializeField] private Bullet _projectile;
     [SerializeField] private float[] _anglesToShoot = new float[4] { 0f, 90f, 180f, 270f };
@@ -22,11 +22,21 @@ public class Cactus : Plant
 
         DestroyBulletsOutsideRadius();
 
-        if (Time.time >= _lastBulletSpawnTime + _attackDelay) 
+        if (Time.time >= _lastBulletSpawnTime + GetCurrentAttackDelay()) 
         {
             SpawnBullets();
             _lastBulletSpawnTime = Time.time;
         }
+    }
+
+    private float GetCurrentAttackDelay()
+    {
+        return _attackDelayBase / GetEfficiencyFactor();
+    }
+
+    private float GetCurrentProjectileDamage()
+    {
+        return _projectileDamageBase * GetEfficiencyFactor();
     }
 
     private void SpawnBullets()
@@ -35,7 +45,7 @@ public class Cactus : Plant
         {
             var bullet = Instantiate(_projectile, transform.position, Quaternion.Euler(0, 0, angle));
 
-            bullet.Shoot(gameObject, _projectileDamage, _projectileSpeed);
+            bullet.Shoot(gameObject, GetCurrentProjectileDamage(), _projectileSpeed);
             _spawnedBullets.Add(bullet);
         }
     }

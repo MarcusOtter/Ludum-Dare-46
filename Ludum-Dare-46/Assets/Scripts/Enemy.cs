@@ -23,6 +23,7 @@ public class Enemy : MonoBehaviour, IDamageable, ICircleOnHover
     [Header("Audio settings")]
     [SerializeField] private SoundEffect _damagedSound;
 
+    internal EnemyState CurrentState;
     internal Vector2 CurrentVelocity => _rigidbody.velocity;
 
     private Rigidbody2D _rigidbody;
@@ -32,7 +33,6 @@ public class Enemy : MonoBehaviour, IDamageable, ICircleOnHover
 
     private Vector2 _movementDirection;
     private List<WaterArea> _waterAreasToFleeFrom = new List<WaterArea>();
-    private EnemyState _currentState;
     private float _health;
     private float _lastAttackTime = -100f;
     private float _lastStunTime = -100f;
@@ -52,7 +52,7 @@ public class Enemy : MonoBehaviour, IDamageable, ICircleOnHover
 
     private void FixedUpdate()
     {
-        if (_currentState == EnemyState.Dead) 
+        if (CurrentState == EnemyState.Dead) 
         {
             _rigidbody.velocity = Vector2.zero;
             return; 
@@ -103,14 +103,14 @@ public class Enemy : MonoBehaviour, IDamageable, ICircleOnHover
 
     private void SetState(EnemyState state)
     {
-        if (_currentState == EnemyState.Dead) { return; }
+        if (CurrentState == EnemyState.Dead) { return; }
 
-        if (_currentState != state)
+        if (CurrentState != state)
         {
-            OnStateChanged?.Invoke(_currentState, state);
+            OnStateChanged?.Invoke(CurrentState, state);
         }
 
-        _currentState = state;
+        CurrentState = state;
     }
 
     private void Attack()
@@ -149,7 +149,7 @@ public class Enemy : MonoBehaviour, IDamageable, ICircleOnHover
 
     public void Damage(float incomingDamage)
     {
-        if (_currentState == EnemyState.Dead) { return; }
+        if (CurrentState == EnemyState.Dead) { return; }
 
         _health -= incomingDamage;
         _healthBar.SetHealth(_health, _maxHealth);
@@ -162,6 +162,9 @@ public class Enemy : MonoBehaviour, IDamageable, ICircleOnHover
     private void Die()
     {
         SetState(EnemyState.Dead);
+        _rigidbody.velocity = Vector2.zero;
+        _rigidbody.simulated = false;
+        _healthBar.SetVisibility(false);
     }
 
     private void OnTriggerEnter2D(Collider2D collider)
@@ -187,11 +190,11 @@ public class Enemy : MonoBehaviour, IDamageable, ICircleOnHover
 
     public float GetRadius()
     {
-        return _attackRadius;
+        return _plantDetector.DetectionRadius;
     }
 
     public Color GetColour()
     {
-        return Color.red;
+        return new Color32(255, 0, 0, 75);
     }
 }

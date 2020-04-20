@@ -1,13 +1,18 @@
-﻿using UnityEngine;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using UnityEngine;
 
 [RequireComponent(typeof(Collider2D))]
-public abstract class Plant : MonoBehaviour, IWaterable, IDamageable
+public abstract class Plant : MonoBehaviour, IWaterable, IDamageable, ICircleOnHover
 {
+    internal Action<GrowthStage, GrowthStage> OnGrowthStageChanged;
+
     [Header("General plant settings")]
     [SerializeField] internal PlantType PlantType;
     [SerializeField] internal string Name;
     [SerializeField] internal string Description;
-    [SerializeField] protected float ActiveRadius;
+    [SerializeField] protected float ActiveRadius = 3f;
 
     [Header("Health")]
     [SerializeField] private float _fullyGrownMaxHealth = 20f;
@@ -21,13 +26,14 @@ public abstract class Plant : MonoBehaviour, IWaterable, IDamageable
 
     [Header("References")]
     [SerializeField] private SpriteRenderer _spriteRenderer;
-    [SerializeField] private HealthBar _healthBar; 
+    [SerializeField] private HealthBar _healthBar;
 
-    internal bool IsDead { get; private set; }
-    protected float Efficiency { get; private set; }
-    protected GrowthStage GrowthStage { get; private set; }
+    internal GrowthStage GrowthStage { get; private set; }
 
     private float _health;
+
+    private readonly List<HealthPlant> _healthBoostingPlants = new List<HealthPlant>();
+    private readonly List<EfficiencyPlant> _efficiencyBoostingPlants = new List<EfficiencyPlant>();
 
     private void Awake()
     {
@@ -42,9 +48,10 @@ public abstract class Plant : MonoBehaviour, IWaterable, IDamageable
         _healthBar.SetHealth(_health, GetCurrentMaxHealth());
     }
 
-    protected virtual void Update()
+    private void OnEnable()
     {
-        // Placeholder 
+        HealthPlant.OnDeath += HandleHealthPlantDeath;
+        EfficiencyPlant.OnDeath += HandleEfficiencyPlantDeath;
     }
 
     public void Water(float waterAmount)
@@ -57,22 +64,57 @@ public abstract class Plant : MonoBehaviour, IWaterable, IDamageable
         ModifyHealth(-incomingDamage);
     }
 
-    internal void ModifyEfficiency(Plant efficiencyPlant, float efficiencyDelta)
+    internal void AddEfficiencyBoost(EfficiencyPlant sender)
     {
-        if (efficiencyPlant == this) { return; }
-        Efficiency += efficiencyDelta;
+        _efficiencyBoostingPlants.AddIfNotContains(sender);
+        _healthBar.SetHealth(_health, GetCurrentMaxHealth());
+    }
+
+    internal void AddHealthBoost(HealthPlant sender)
+    {
+        _healthBoostingPlants.AddIfNotContains(sender);
+        _healthBar.SetHealth(_health, GetCurrentMaxHealth());
+    }
+
+    protected float GetEfficiencyFactor()
+    {
+        var efficiencyBoost = _efficiencyBoostingPlants.Sum(x => x.EfficiencyIncrease);
+        return efficiencyBoost == 0 
+            ? 1 
+            : 1 + efficiencyBoost;
+    }
+
+    protected virtual void Update()
+    {
+        // Placeholder
+    }
+
+    private void HandleEfficiencyPlantDeath(EfficiencyPlant sender)
+    {
+        _efficiencyBoostingPlants.RemoveIfContains(sender);
+    }
+
+    private void HandleHealthPlantDeath(HealthPlant sender)
+    {
+        _healthBoostingPlants.RemoveIfContains(sender);
     }
 
     private float GetCurrentMaxHealth()
     {
-        return GrowthStage == GrowthStage.Seedling
+        var maxHealthIncrease = _healthBoostingPlants.Sum(x => x.GetHealthIncrease());
+
+        var maxHealth = GrowthStage == GrowthStage.Seedling
             ? _seedlingMaxHealth
             : _fullyGrownMaxHealth;
+
+        return maxHealthIncrease == 0
+            ? maxHealth
+            : maxHealth * (1 + maxHealthIncrease);
     }
 
     private void ModifyHealth(float amount)
     {
-        if (IsDead) { return; }
+        if (GrowthStage == GrowthStage.Dead) { return; }
 
         _health += amount;
 
@@ -92,9 +134,8 @@ public abstract class Plant : MonoBehaviour, IWaterable, IDamageable
         }
     }
 
-    private void Die()
+    protected virtual void Die()
     {
-        IsDead = true;
         SetNewGrowthStage(GrowthStage.Dead);
         _healthBar.SetVisibility(false);
 
@@ -106,9 +147,13 @@ public abstract class Plant : MonoBehaviour, IWaterable, IDamageable
 
     private void SetNewGrowthStage(GrowthStage growthStage)
     {
+        OnGrowthStageChanged?.Invoke(GrowthStage, growthStage);
+
         GrowthStage = growthStage;
         _spriteRenderer.sprite = GetSpriteForGrowthStage(growthStage);
+
         // Could do particle effects here and sounds, maybe animation for sacred idk
+        // actually we have an event now so it should be separated
     }
 
     private Sprite GetSpriteForGrowthStage(GrowthStage growthStage) 
@@ -120,5 +165,21 @@ public abstract class Plant : MonoBehaviour, IWaterable, IDamageable
             case GrowthStage.FullyGrown: return _fullyGrownSprite;
             default:                     return null;
         }
+    }
+
+    private void OnDisable()
+    {
+        HealthPlant.OnDeath -= HandleHealthPlantDeath;
+        EfficiencyPlant.OnDeath -= HandleEfficiencyPlantDeath;
+    }
+
+    public float GetRadius()
+    {
+        return ActiveRadius;
+    }
+
+    public Color GetColour()
+    {
+        return new Color32(0, 255, 0, 75);
     }
 }

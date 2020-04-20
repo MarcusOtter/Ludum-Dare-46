@@ -354,7 +354,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _maxWaterCapacity: 100
-  _startingWaterAmount: 20
+  _startingWaterAmount: 50
   _inventoryBoxPrefab: {fileID: 6494447512556175857, guid: ed90aada7b6c76048a079b89ee662602,
     type: 3}
   _sidebar: {fileID: 579947842}

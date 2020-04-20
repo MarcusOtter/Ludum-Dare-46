@@ -3,7 +3,7 @@
     Gun,
     Ammo,
     Cactus,
-    Heal,
+    Health,
     Efficiency,
     Sacred
 }
