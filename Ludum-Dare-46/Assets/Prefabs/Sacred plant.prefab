@@ -126,6 +126,7 @@ MonoBehaviour:
   Name: The sacred plant
   Description: Protect it with your life.
   ActiveRadius: 0
+  HoverCircleColour: {r: 0, g: 1, b: 0, a: 0.39215687}
   _fullyGrownMaxHealth: 200
   _seedlingMaxHealth: 0
   _seedlingStartHealth: 0
@@ -210,6 +211,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Health bar
+      objectReference: {fileID: 0}
+    - target: {fileID: 8722687135254149680, guid: 2263e30b79d6fe24eabdbac9868f32a2,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 0.27450982
+      objectReference: {fileID: 0}
+    - target: {fileID: 8722687135254149680, guid: 2263e30b79d6fe24eabdbac9868f32a2,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8722687135254149680, guid: 2263e30b79d6fe24eabdbac9868f32a2,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 0.27450982
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2263e30b79d6fe24eabdbac9868f32a2, type: 3}

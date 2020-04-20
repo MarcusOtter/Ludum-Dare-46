@@ -119,12 +119,13 @@ Game remake:
     ✔ Inventory system for seeds
     ✔ Pick up seeds & add to inventory
     ☐ Plant the seed
-    ☐ Plant grow and plant behaviour
-        ☐ Gun plant - shoots enemies nearby but needs ammo
-        ☐ Ammo plant - gives ammo to nearby plants
-        ☐ Cactus - Shoots in a circle around it short range
-        ☐ Red plant - Heals plants in the area
-        ☐ Green plant - Efficiency bonus for plants in the area
+
+    ✔ Plant grow and plant behaviour
+        ✔ Gun plant - shoots enemies nearby but needs ammo
+        ✔ Ammo plant - gives ammo to nearby plants
+        ✔ Cactus - Shoots in a circle around it short range
+        ✔ Health plant - Increases max health
+        ✔ Efficiency plant - Efficiency bonus for plants in the area
     ☐ Get water from clouds (they rain)
     ✔ If the cloud is over the plant it's meter fills up automatically
     ✔ Make the water shooting gun
@@ -167,10 +168,16 @@ Game remake:
         ✔ Water sploosh
         ✔ Rain droplet
 
-        ☐ ICircleOnHover
+        ✔ ICircleOnHover
             Will be used for plants and enemy melee radius
-            ☐ Color
-            ☐ Radius
+            ✔ Color
+            ✔ Radius
+
+        ✔ Dont give ammo if dead plant
+        ✔ Rotate bullet
+        ✔ Dont shoot dead enemies
+
+        Fix circle script
 
     To discuss:
         ☐ Do you press a button to suck up the clouds or does it just happen

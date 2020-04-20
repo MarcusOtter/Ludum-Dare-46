@@ -92,6 +92,7 @@ GameObject:
   - component: {fileID: 9041311271003707536}
   - component: {fileID: 9041311271003707539}
   - component: {fileID: 1598602376122438135}
+  - component: {fileID: 4627640188357773148}
   m_Layer: 0
   m_Name: Cactus
   m_TagString: Untagged
@@ -157,6 +158,7 @@ MonoBehaviour:
   Name: Cactus
   Description: Hurt plant
   ActiveRadius: 4
+  HoverCircleColour: {r: 0, g: 1, b: 0, a: 0.39215687}
   _fullyGrownMaxHealth: 15
   _seedlingMaxHealth: 10
   _seedlingStartHealth: 3
@@ -165,8 +167,8 @@ MonoBehaviour:
   _fullyGrownSprite: {fileID: 21300000, guid: b10e8326469482d478e73a2c6587eb04, type: 3}
   _spriteRenderer: {fileID: 9041311270504737967}
   _healthBar: {fileID: 9041311271830358356}
-  _attackDelay: 2
-  _projectileDamage: 5
+  _attackDelayBase: 2
+  _projectileDamageBase: 5
   _projectileSpeed: 4
   _projectile: {fileID: 8053901613935778316, guid: d82d781736f8d7c4eb94eefd3c4bb2e2,
     type: 3}
@@ -175,6 +177,20 @@ MonoBehaviour:
   - 90
   - 180
   - 270
+--- !u!114 &4627640188357773148
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9041311271003707537}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3bf609b6cb62bd41a7a68bf147ef7c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _circlePrefab: {fileID: 4693579199072887557, guid: eb9410af486d54542a532ecfabed874e,
+    type: 3}
 --- !u!1001 &320887035152213580
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -241,6 +257,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Health bar
+      objectReference: {fileID: 0}
+    - target: {fileID: 8722687135254149680, guid: 2263e30b79d6fe24eabdbac9868f32a2,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 0.27450982
+      objectReference: {fileID: 0}
+    - target: {fileID: 8722687135254149680, guid: 2263e30b79d6fe24eabdbac9868f32a2,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8722687135254149680, guid: 2263e30b79d6fe24eabdbac9868f32a2,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 0.27450982
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2263e30b79d6fe24eabdbac9868f32a2, type: 3}

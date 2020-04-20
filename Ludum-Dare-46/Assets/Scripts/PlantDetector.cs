@@ -45,7 +45,7 @@ public class PlantDetector : MonoBehaviour
 
     internal Plant[] GetPlantsInRange()
     {
-        return _plantsInRange.Where(x => !x.IsDead).ToArray();
+        return _plantsInRange.Where(x => x.GrowthStage != GrowthStage.Dead).ToArray();
     }
 
     private void OnTriggerEnter2D(Collider2D collider)

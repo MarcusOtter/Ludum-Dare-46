@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4806920482935668789}
   - component: {fileID: 4806920482935668787}
   - component: {fileID: 4806920482935668788}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Graphics
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -86,7 +86,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4806920483136772224}
   - component: {fileID: 4806920483136772255}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Graphics
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -169,7 +169,7 @@ GameObject:
   - component: {fileID: 4806920483182120739}
   - component: {fileID: 4806920483182120740}
   - component: {fileID: 2187207375923307902}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -252,7 +252,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4806920483381293791}
   - component: {fileID: 4806920483381293790}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -335,7 +335,7 @@ GameObject:
   - component: {fileID: 4806920484522029577}
   - component: {fileID: 4806920484522029576}
   - component: {fileID: 1144050875}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: 'Weapon '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -482,7 +482,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4806920484586531857}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Weapon pivot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
