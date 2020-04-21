@@ -7,6 +7,11 @@ public class FollowTransform : MonoBehaviour
 
     private void Update()
     {
+        if (_transformToFollow == null) 
+        { 
+            Destroy(gameObject);
+            return;
+        }
         transform.position = _transformToFollow.position + _offset;
     }
 }

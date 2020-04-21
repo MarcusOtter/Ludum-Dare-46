@@ -1,13 +1,13 @@
 ﻿using UnityEngine;
 
-[RequireComponent(typeof(SpriteRenderer))]
+[RequireComponent(typeof(BoxCollider2D))]
 public class CloudWrapper : MonoBehaviour
 {
     private Bounds _bounds;
 
     private void Awake()
     {
-        _bounds = GetComponent<SpriteRenderer>().bounds;
+        _bounds = GetComponent<BoxCollider2D>().bounds;
     }
 
     private void OnTriggerExit2D(Collider2D collider)

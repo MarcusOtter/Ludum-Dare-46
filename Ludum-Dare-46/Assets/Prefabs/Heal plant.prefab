@@ -76,7 +76,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PlantType: 3
   Name: Health plant
-  Description: Boosts the maximum amount of health of nearby plants by 20%.
+  Description: Gives nearby plants 20% more max health.
   ActiveRadius: 10
   _fullyGrownMaxHealth: 20
   _seedlingMaxHealth: 10

@@ -165,6 +165,7 @@ public class Enemy : MonoBehaviour, IDamageable, ICircleOnHover
         _rigidbody.velocity = Vector2.zero;
         _rigidbody.simulated = false;
         _healthBar.SetVisibility(false);
+        Destroy(gameObject);
     }
 
     private void OnTriggerEnter2D(Collider2D collider)

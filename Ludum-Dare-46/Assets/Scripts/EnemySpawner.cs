@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
@@ -10,7 +8,6 @@ public class EnemySpawner : MonoBehaviour
     private float _lastSpawn = -10000;
 
     [SerializeField] private float _spawnStartTime;
-
 
     private void Start()
     {
@@ -30,5 +27,6 @@ public class EnemySpawner : MonoBehaviour
         if (_enemies.Length == 0 || _spawnpoints.Length == 0 || Time.time < _spawnStartTime) return;
         Instantiate(_enemies[enemyIndex], _spawnpoints[locationIndex]);
         _lastSpawn = Time.time;
+        _spawnInterval /= 1.05f;
     }
 }

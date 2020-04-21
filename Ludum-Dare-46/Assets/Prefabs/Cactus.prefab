@@ -157,7 +157,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PlantType: 2
   Name: Cactus
-  Description: Hurt plant
+  Description: Shoots spikes in all four directions which hurt enemies.
   ActiveRadius: 4
   _fullyGrownMaxHealth: 15
   _seedlingMaxHealth: 10

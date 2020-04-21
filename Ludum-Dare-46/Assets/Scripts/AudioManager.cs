@@ -22,7 +22,7 @@ public class AudioManager : MonoBehaviour
     private void Awake()
     {
         if (!IsAloneSingleton()) { return; }
-        UpdateAudioSourceVolume();
+        //UpdateAudioSourceVolume();
     }
 
     internal void PlaySoundEffect(SoundEffect soundEffect, float volumeScale = 1f)
