@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody2D), typeof(Collider2D))]
+[RequireComponent(typeof(Collider2D))]
 public class Bullet : MonoBehaviour
 {
     [Header("Bullet settings")]
@@ -13,6 +13,7 @@ public class Bullet : MonoBehaviour
     [SerializeField] private ParticleSystem.MinMaxGradient _enemyImpactColor;
 
     private float _damage;
+    private float _speed;
     private Rigidbody2D _rigidbody;
     private GameObject _sender;
 
@@ -23,10 +24,16 @@ public class Bullet : MonoBehaviour
 
     internal void Shoot(GameObject sender, float damage, float speed)
     {
+        _speed = speed;
         _sender = sender;
         _damage = damage;
-        _rigidbody.AddForce(transform.up * speed, ForceMode2D.Impulse);
+       // _rigidbody.AddForce(transform.up * speed, ForceMode2D.Impulse);
         Destroy(transform.root.gameObject, _timeUntilDestroyed);
+    }
+
+    private void FixedUpdate()
+    {
+        transform.position += (transform.up * _speed * Time.fixedDeltaTime);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
